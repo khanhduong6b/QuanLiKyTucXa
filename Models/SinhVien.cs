@@ -22,6 +22,8 @@ public partial class SinhVien
     public int? Mp { get; set; }
 
     public int? SoGiuong { get; set; }
+    public string MatKhau { get; set; }
+
 
     public virtual ICollection<GiuongNgu> GiuongNgus { get; set; } = new List<GiuongNgu>();
 
