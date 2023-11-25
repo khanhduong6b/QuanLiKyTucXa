@@ -1,4 +1,11 @@
+using Microsoft.EntityFrameworkCore;
+using QuanLiKyTucXa.Models;
+
 var builder = WebApplication.CreateBuilder(args);
+
+
+builder.Services.AddDbContext<QlktxContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("QLKTXContext")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
