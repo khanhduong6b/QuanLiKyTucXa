@@ -6,6 +6,7 @@ using System.Text.Encodings.Web;
 
 namespace QuanLiKyTucXa.Controllers
 {
+    [Route("/Auth/[action]")]
     public class AuthController : Controller
     {
         private readonly QlktxContext _context;

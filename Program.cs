@@ -6,6 +6,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddSession();
+
 builder.Services.AddScoped<HasPassword>();
 var connectionString = builder.Configuration.GetConnectionString("QLKTXContext");
 builder.Services.AddDbContext<QlktxContext>(options => options.UseSqlServer(connectionString));
@@ -22,6 +24,7 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
+app.UseSession();
 app.UseRouting();
 
 app.UseAuthorization();
