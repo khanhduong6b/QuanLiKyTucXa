@@ -23,8 +23,6 @@ public partial class QlktxContext : DbContext
 
     public virtual DbSet<Khu> Khus { get; set; }
 
-    public virtual DbSet<NhatKy> NhatKies { get; set; }
-
     public virtual DbSet<PhieuDangKy> PhieuDangKies { get; set; }
 
     public virtual DbSet<Phong> Phongs { get; set; }
@@ -121,38 +119,6 @@ public partial class QlktxContext : DbContext
             entity.Property(e => e.ViTri)
                 .HasMaxLength(50)
                 .HasColumnName("viTri");
-        });
-
-        modelBuilder.Entity<NhatKy>(entity =>
-        {
-            entity.HasKey(e => e.Mssv);
-
-            entity.ToTable("NhatKy");
-
-            entity.Property(e => e.Mssv)
-                .HasMaxLength(10)
-                .IsUnicode(false)
-                .IsFixedLength()
-                .HasColumnName("mssv");
-            entity.Property(e => e.NamHoc)
-                .HasMaxLength(9)
-                .IsUnicode(false)
-                .IsFixedLength()
-                .HasColumnName("namHoc");
-            entity.Property(e => e.NgayThu)
-                .HasColumnType("date")
-                .HasColumnName("ngayThu");
-            entity.Property(e => e.SoBienLai)
-                .HasMaxLength(20)
-                .IsUnicode(false)
-                .IsFixedLength()
-                .HasColumnName("soBienLai");
-            entity.Property(e => e.SoTien).HasColumnName("soTien");
-
-            entity.HasOne(d => d.MssvNavigation).WithOne(p => p.NhatKy)
-                .HasForeignKey<NhatKy>(d => d.Mssv)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_NhatKy_SinhVien");
         });
 
         modelBuilder.Entity<PhieuDangKy>(entity =>

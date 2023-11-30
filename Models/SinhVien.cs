@@ -31,7 +31,5 @@ public partial class SinhVien
 
     public virtual Phong? MpNavigation { get; set; }
 
-    public virtual NhatKy? NhatKy { get; set; }
-
     public virtual ICollection<PhieuDangKy> PhieuDangKies { get; set; } = new List<PhieuDangKy>();
 }

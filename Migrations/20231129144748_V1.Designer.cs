@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using QuanLiKyTucXa.Models;
 
@@ -11,9 +12,11 @@ using QuanLiKyTucXa.Models;
 namespace QuanLiKyTucXa.Migrations
 {
     [DbContext(typeof(QlktxContext))]
-    partial class QlktxContextModelSnapshot : ModelSnapshot
+    [Migration("20231129144748_V1")]
+    partial class V1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -142,6 +145,43 @@ namespace QuanLiKyTucXa.Migrations
                     b.HasKey("KhuVuc");
 
                     b.ToTable("Khu", (string)null);
+                });
+
+            modelBuilder.Entity("QuanLiKyTucXa.Models.NhatKy", b =>
+                {
+                    b.Property<string>("Mssv")
+                        .HasMaxLength(10)
+                        .IsUnicode(false)
+                        .HasColumnType("char(10)")
+                        .HasColumnName("mssv")
+                        .IsFixedLength();
+
+                    b.Property<string>("NamHoc")
+                        .IsRequired()
+                        .HasMaxLength(9)
+                        .IsUnicode(false)
+                        .HasColumnType("char(9)")
+                        .HasColumnName("namHoc")
+                        .IsFixedLength();
+
+                    b.Property<DateTime?>("NgayThu")
+                        .HasColumnType("date")
+                        .HasColumnName("ngayThu");
+
+                    b.Property<string>("SoBienLai")
+                        .HasMaxLength(20)
+                        .IsUnicode(false)
+                        .HasColumnType("char(20)")
+                        .HasColumnName("soBienLai")
+                        .IsFixedLength();
+
+                    b.Property<double?>("SoTien")
+                        .HasColumnType("float")
+                        .HasColumnName("soTien");
+
+                    b.HasKey("Mssv");
+
+                    b.ToTable("NhatKy", (string)null);
                 });
 
             modelBuilder.Entity("QuanLiKyTucXa.Models.PhieuDangKy", b =>
@@ -298,6 +338,17 @@ namespace QuanLiKyTucXa.Migrations
                     b.Navigation("MssvNavigation");
                 });
 
+            modelBuilder.Entity("QuanLiKyTucXa.Models.NhatKy", b =>
+                {
+                    b.HasOne("QuanLiKyTucXa.Models.SinhVien", "MssvNavigation")
+                        .WithOne("NhatKy")
+                        .HasForeignKey("QuanLiKyTucXa.Models.NhatKy", "Mssv")
+                        .IsRequired()
+                        .HasConstraintName("FK_NhatKy_SinhVien");
+
+                    b.Navigation("MssvNavigation");
+                });
+
             modelBuilder.Entity("QuanLiKyTucXa.Models.PhieuDangKy", b =>
                 {
                     b.HasOne("QuanLiKyTucXa.Models.SinhVien", "MssvNavigation")
@@ -347,6 +398,8 @@ namespace QuanLiKyTucXa.Migrations
                     b.Navigation("GiuongNgus");
 
                     b.Navigation("HoaDonPhongs");
+
+                    b.Navigation("NhatKy");
 
                     b.Navigation("PhieuDangKies");
                 });
