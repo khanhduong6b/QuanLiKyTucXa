@@ -1,24 +1,31 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace QuanLiKyTucXa.Models;
 
 public partial class SinhVien
 {
+    [Required(ErrorMessage = "Mã sinh viên không được để trống")]
+    [StringLength(10, ErrorMessage = "Mã sinh viên không được quá 10 ký tự")]
+    [DisplayName("Mã sinh viên")]
     public string Mssv { get; set; } = null!;
-
+    [Required(ErrorMessage = "Họ tên không được để trống")]
+    [DisplayName("Họ tên")]
     public string HoTen { get; set; } = null!;
-
+    [DisplayName("Giới tính")]
     public bool GioiTinh { get; set; }
-
+    [Required(ErrorMessage = "Ngày sinh không được để trống")]
+    [DisplayName("Ngày sinh")]
     public DateTime NgaySinh { get; set; }
-
+    [Required(ErrorMessage ="Lớp không được để trống")]
+    [DisplayName("Lớp")]
     public string Lop { get; set; } = null!;
-
+    [Required(ErrorMessage = "Khoa không được để trống")]
+    [DisplayName("Khoa")]
     public string Khoa { get; set; } = null!;
-
     public string? Sdt { get; set; }
 
     public int? Mp { get; set; }
