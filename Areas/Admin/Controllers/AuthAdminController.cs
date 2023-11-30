@@ -1,24 +1,22 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.WebUtilities;
 using QuanLiKyTucXa.Helper;
 using QuanLiKyTucXa.Models;
-using System.Text.Encodings.Web;
 
-namespace QuanLiKyTucXa.Controllers
+namespace QuanLiKyTucXa.Areas.Admin.Controllers
 {
-    [Route("/Auth/[action]")]
-    public class AuthController : Controller
+    [Area("Admin")]
+    [Route("/AuthAdmin/[action]")]
+    public class AuthAdminController : Controller
     {
         private readonly QlktxContext _context;
         private readonly HasPassword _hasPassword;
 
-        public AuthController(QlktxContext context, HasPassword hasPassword)
+        public AuthAdminController(QlktxContext context, HasPassword hasPassword)
         {
             _context = context;
             _hasPassword = hasPassword;
         }
-
-        public IActionResult Login()
+        public IActionResult LoginAdmin()
         {
             if (HttpContext.Session.GetString("Username") == null)
             {
@@ -27,34 +25,33 @@ namespace QuanLiKyTucXa.Controllers
             }
             else
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "HomeAdmin");
             }
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(LoginVM user)
+        public async Task<IActionResult> LoginAdmin(LoginVM user)
         {
             if (HttpContext.Session.GetString("Username") == null)
             {
-                var u = _context.SinhViens.SingleOrDefault(p => p.Mssv == user.Username);
+                var u = _context.AdminAccounts.SingleOrDefault(p => p.TaiKhoan == user.Username);
                 if (u == null) return View();
 
-                if (u.Mssv == user.Username && u.MatKhau == user.Password)
+                if (u.TaiKhoan == user.Username && u.MatKhau == user.Password)
                 {
 
-                    HttpContext.Session.SetString("Username", u.Mssv.ToString());
-                        return RedirectToAction("Index", "Home");
+                    HttpContext.Session.SetString("Username", u.TaiKhoan.ToString());
+                    return RedirectToAction("Index", "HomeAdmin");
                 }
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "HomeAdmin");
         }
 
         public IActionResult Logout()
         {
             HttpContext.Session.Clear();
             HttpContext.Session.Remove("Username");
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Login", "Auth");
         }
-
     }
 }

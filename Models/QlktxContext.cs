@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Xml;
 using Microsoft.EntityFrameworkCore;
 
 namespace QuanLiKyTucXa.Models;
@@ -30,6 +31,8 @@ public partial class QlktxContext : DbContext
     public virtual DbSet<Phong> Phongs { get; set; }
 
     public virtual DbSet<SinhVien> SinhViens { get; set; }
+    public virtual DbSet<AdminAccount> AdminAccounts { get; set; }
+
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) { }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -211,7 +214,7 @@ public partial class QlktxContext : DbContext
             entity.ToTable("SinhVien");
 
             entity.Property(e => e.Mssv)
-                .HasMaxLength(10)
+                .HasColumnType("varchar(10)")
                 .IsUnicode(false)
                 .IsFixedLength()
                 .HasColumnName("mssv");
@@ -242,6 +245,15 @@ public partial class QlktxContext : DbContext
             entity.HasOne(d => d.MpNavigation).WithMany(p => p.SinhViens)
                 .HasForeignKey(d => d.Mp)
                 .HasConstraintName("FK_SinhVien_Phong");
+        });
+
+        modelBuilder.Entity<AdminAccount>(e =>
+        {
+            e.HasIndex(p => p.TaiKhoan).IsUnique();
+            e.Property(p => p.TaiKhoan).HasColumnType("varchar(30)");
+            
+            e.Property(e => e.MatKhau).HasColumnType("varchar(30)");
+
         });
 
         OnModelCreatingPartial(modelBuilder);
