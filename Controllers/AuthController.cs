@@ -32,14 +32,14 @@ namespace QuanLiKyTucXa.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(LoginVM user)
+        public IActionResult Login(LoginVM user)
         {
             if (HttpContext.Session.GetString("Username") == null)
             {
                 var u = _context.SinhViens.SingleOrDefault(p => p.Mssv == user.Username);
                 if (u == null) return View();
 
-                if (u.Mssv == user.Username && u.MatKhau == user.Password)
+                if (u.Mssv == user.Username && u.MatKhau == _hasPassword.HasPasswordHandler(user.Password)) 
                 {
 
                     HttpContext.Session.SetString("Username", u.Mssv.ToString());

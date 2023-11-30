@@ -33,4 +33,3 @@ namespace QuanLiKyTucXa.Helper
 
     }
 }
-//context.ActionDescriptor.RouteValues["Controller"] == "HomeAdmin"
