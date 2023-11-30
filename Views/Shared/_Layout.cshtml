@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@{
+    var user = ViewBag.User;
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -25,6 +29,20 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
+                        @if (user == null)
+                        {                
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-action="Login" asp-controller="Auth"><p style="color: red">Đăng nhập</p></a>
+                            </li>
+
+                        }
+                        else
+                        {                           
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-action="Logout" asp-controller="Auth"><p style="color: blue">Đăng xuất</p></a>
+                            </li>
+                        }
+
                     </ul>
                 </div>
             </div>

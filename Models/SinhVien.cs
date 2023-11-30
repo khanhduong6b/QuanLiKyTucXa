@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace QuanLiKyTucXa.Models;
 
@@ -22,6 +24,7 @@ public partial class SinhVien
     public int? Mp { get; set; }
 
     public int? SoGiuong { get; set; }
+    [Column(TypeName = "varchar(30)")]
     public string MatKhau { get; set; }
 
 

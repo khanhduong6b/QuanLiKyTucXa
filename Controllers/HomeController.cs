@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using QuanLiKyTucXa.Helper;
 using QuanLiKyTucXa.Models;
 using System.Diagnostics;
 
 namespace QuanLiKyTucXa.Controllers
 {
-
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -16,6 +16,8 @@ namespace QuanLiKyTucXa.Controllers
 
         public IActionResult Index()
         {
+            var user = HttpContext.Session.GetString("Username");
+            ViewBag.User = user;
             return View();
         }
 
