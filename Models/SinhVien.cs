@@ -37,11 +37,11 @@ public partial class SinhVien
     public string MatKhau { get; set; }
 
 
-    public virtual ICollection<GiuongNgu> GiuongNgus { get; set; } = new List<GiuongNgu>();
+    public virtual GiuongNgu? GiuongNguNavigation { get; set; }
 
     public virtual ICollection<HoaDonPhong> HoaDonPhongs { get; set; } = new List<HoaDonPhong>();
 
     public virtual Phong? MpNavigation { get; set; }
 
-    public virtual ICollection<PhieuDangKy> PhieuDangKies { get; set; } = new List<PhieuDangKy>();
+    public virtual PhieuDangKy? PhieuDangKyNavigation { get; set; }
 }

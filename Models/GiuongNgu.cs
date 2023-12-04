@@ -17,4 +17,5 @@ public partial class GiuongNgu
     public string? Mssv { get; set; }
 
     public virtual SinhVien? MssvNavigation { get; set; }
+    public virtual Phong? MpNavigation { get; set; }
 }
