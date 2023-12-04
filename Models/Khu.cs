@@ -16,6 +16,6 @@ public partial class Khu
     [Required(ErrorMessage = "Vị trí không được để trống")]
     [DisplayName("Vị trí")]
     public string ViTri { get; set; } = null!;
-
+    [DisplayName("Danh sách phòng")]
     public virtual ICollection<Phong> Phongs { get; set; } = new List<Phong>();
 }

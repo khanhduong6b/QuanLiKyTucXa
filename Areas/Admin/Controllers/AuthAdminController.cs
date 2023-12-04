@@ -37,7 +37,7 @@ namespace QuanLiKyTucXa.Areas.Admin.Controllers
                 var u = _context.AdminAccounts.SingleOrDefault(p => p.TaiKhoan == user.Username);
                 if (u == null) return View();
 
-                if (u.TaiKhoan == user.Username && u.MatKhau == _hasPassword.HasPasswordHandler(user.Password))
+                if (u.TaiKhoan == user.Username && u.MatKhau == user.Password)
                 {
 
                     HttpContext.Session.SetString("Username", u.TaiKhoan.ToString());

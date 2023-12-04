@@ -39,10 +39,11 @@ namespace QuanLiKyTucXa.Controllers
                 var u = _context.SinhViens.SingleOrDefault(p => p.Mssv == user.Username);
                 if (u == null) return View();
 
-                if (u.Mssv == user.Username && u.MatKhau == _hasPassword.HasPasswordHandler(user.Password)) 
+                if (u.Mssv == user.Username && u.MatKhau == user.Password) 
                 {
 
                     HttpContext.Session.SetString("Username", u.Mssv.ToString());
+
                         return RedirectToAction("Index", "Home");
                 }
             }

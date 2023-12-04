@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace QuanLiKyTucXa.Models;
 
@@ -26,10 +27,11 @@ public partial class SinhVien
     [Required(ErrorMessage = "Khoa không được để trống")]
     [DisplayName("Khoa")]
     public string Khoa { get; set; } = null!;
+    [DisplayName("Số điện thoại")]
     public string? Sdt { get; set; }
-
+    [DisplayName("Mã phòng")]
     public int? Mp { get; set; }
-
+    [DisplayName("Số giường")]
     public int? SoGiuong { get; set; }
     [Column(TypeName = "varchar(30)")]
     public string MatKhau { get; set; }

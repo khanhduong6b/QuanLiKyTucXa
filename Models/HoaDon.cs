@@ -7,9 +7,10 @@ namespace QuanLiKyTucXa.Models;
 
 public partial class HoaDon
 {
-    [Required(ErrorMessage = "Mã phòng không được để trống")]
-    [DisplayName("Mã phòng")]
-    public int Mp { get; set; }
+    [Key]
+    [Required(ErrorMessage = "Mã hoá đơn không được để trống")]
+    [DisplayName("Mã hoá đơn")]
+    public int MaHoaDon { get; set; }
     [Required(ErrorMessage = "Tháng không được để trống")]
     [DisplayName("Tháng thu")]
     public int Thang { get; set; }
