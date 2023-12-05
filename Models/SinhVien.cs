@@ -21,7 +21,7 @@ public partial class SinhVien
     [Required(ErrorMessage = "Ngày sinh không được để trống")]
     [DisplayName("Ngày sinh")]
     public DateTime NgaySinh { get; set; }
-    [Required(ErrorMessage ="Lớp không được để trống")]
+    [Required(ErrorMessage = "Lớp không được để trống")]
     [DisplayName("Lớp")]
     public string Lop { get; set; } = null!;
     [Required(ErrorMessage = "Khoa không được để trống")]
@@ -43,5 +43,5 @@ public partial class SinhVien
 
     public virtual Phong? MpNavigation { get; set; }
 
-    public virtual PhieuDangKy? PhieuDangKyNavigation { get; set; }
+    public virtual ICollection<PhieuDangKy> PhieuDangKys { get; set; } = new List<PhieuDangKy>();
 }

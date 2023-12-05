@@ -23,9 +23,10 @@ public partial class Phong
     [Required(ErrorMessage = "Khu vực không được để trống")]
     [DisplayName("Khu vực")]
     public string KhuVuc { get; set; }
-    public virtual ICollection<HoaDon> HoaDons { get; set; } = new List<HoaDon>();
 
     public virtual Khu? KhuVucNavigation { get; set; }
+
+    public virtual ICollection<HoaDon> HoaDons { get; set; } = new List<HoaDon>();
 
     public virtual ICollection<SinhVien> SinhViens { get; set; } = new List<SinhVien>();
     public virtual ICollection<GiuongNgu> GiuongNgus { get; set; } = new List<GiuongNgu>();

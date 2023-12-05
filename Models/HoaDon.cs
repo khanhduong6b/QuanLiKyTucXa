@@ -29,6 +29,8 @@ public partial class HoaDon
     [Required(ErrorMessage = "Trạng thái không được để trống")]
     [DisplayName("Trạng thái")]
     public int TrangThai { get; set; }
-
+    [Required(ErrorMessage = "Mã phòng không được để trống")]
+    [DisplayName("Mã phòng")]
+    public int Mp { get; set; }
     public virtual Phong MpNavigation { get; set; } = null!;
 }
