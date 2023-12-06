@@ -44,7 +44,7 @@ namespace QuanLiKyTucXa.Areas.Admin.Controllers
                     return RedirectToAction("Index", "HomeAdmin");
                 }
             }
-            return RedirectToAction("Index", "HomeAdmin");
+            return RedirectToAction("LoginAdmin", "AuthAdmin", new { Areas = "Admin" });
         }
 
         public IActionResult Logout()
