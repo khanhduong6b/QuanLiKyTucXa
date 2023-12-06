@@ -16,10 +16,12 @@ namespace QuanLiKyTucXa.Helper
                     {"Action", "Login" }
                 });
             }
-            else if (context.ActionDescriptor.RouteValues["Controller"] == "HomeAdmin")
+            else if (u != null)
             {
                 var username = u.ToString().ToLower();
-                if (username.StartsWith("dh"))
+                var controller = context.RouteData.Values["controller"].ToString();
+                var area = context.RouteData.Values["area"]?.ToString();
+                if (area == "Admin" && username.StartsWith("dh"))
                 {
                     context.Result = new RedirectToRouteResult(new RouteValueDictionary
                     {
@@ -28,6 +30,7 @@ namespace QuanLiKyTucXa.Helper
                     });
                     return; // Trả về kết quả để ngăn người dùng tiếp tục truy cập trang Admin
                 }
+                
             }
         }
 
