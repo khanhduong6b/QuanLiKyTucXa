@@ -12,7 +12,7 @@ namespace QuanLiKyTucXa.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Route("/Admin/Phongs/[action]")]
-    [Check]
+    //[Check]
 
     public class PhongsController : Controller
     {
