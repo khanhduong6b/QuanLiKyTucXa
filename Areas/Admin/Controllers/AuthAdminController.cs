@@ -5,7 +5,7 @@ using QuanLiKyTucXa.Models;
 namespace QuanLiKyTucXa.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Route("/AuthAdmin/[action]")]
+    [Route("/Admin/AuthAdmin/[action]")]
     public class AuthAdminController : Controller
     {
         private readonly QlktxContext _context;

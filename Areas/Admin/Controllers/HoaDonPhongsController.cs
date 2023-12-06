@@ -5,11 +5,14 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using QuanLiKyTucXa.Helper;
 using QuanLiKyTucXa.Models;
 
 namespace QuanLiKyTucXa.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Route("/Admin/HoaDonPhongs/[action]")]
+    [Check]
     public class HoaDonPhongsController : Controller
     {
         private readonly QlktxContext _context;

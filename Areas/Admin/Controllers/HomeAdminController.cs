@@ -5,7 +5,7 @@ namespace QuanLiKyTucXa.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Check]
-    [Route("/HomeAdmin/[action]")]
+    [Route("/Admin/HomeAdmin/[action]")]
     public class HomeAdminController : Controller
     {
         public IActionResult Index()
