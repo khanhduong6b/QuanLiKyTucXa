@@ -5,97 +5,95 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using QuanLiKyTucXa.Helper;
 using QuanLiKyTucXa.Models;
 
 namespace QuanLiKyTucXa.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Route("/HoaDonPhong/[action]")]
-    public class HoaDonPhongController : Controller
+    public class SinhViensController : Controller
     {
         private readonly QlktxContext _context;
 
-        public HoaDonPhongController(QlktxContext context)
+        public SinhViensController(QlktxContext context)
         {
             _context = context;
         }
 
-        // GET: Admin/HoaDonPhong
+        // GET: Admin/SinhViens
         public async Task<IActionResult> Index()
         {
-            var qlktxContext = _context.HoaDonPhongs.Include(h => h.MssvNavigation);
+            var qlktxContext = _context.SinhViens.Include(s => s.MpNavigation);
             return View(await qlktxContext.ToListAsync());
         }
 
-        // GET: Admin/HoaDonPhong/Details/5
+        // GET: Admin/SinhViens/Details/5
         public async Task<IActionResult> Details(string id)
         {
-            if (id == null || _context.HoaDonPhongs == null)
+            if (id == null || _context.SinhViens == null)
             {
                 return NotFound();
             }
 
-            var hoaDonPhong = await _context.HoaDonPhongs
-                .Include(h => h.MssvNavigation)
-                .FirstOrDefaultAsync(m => m.MaHoaDon == id);
-            if (hoaDonPhong == null)
+            var sinhVien = await _context.SinhViens
+                .Include(s => s.MpNavigation)
+                .FirstOrDefaultAsync(m => m.Mssv == id);
+            if (sinhVien == null)
             {
                 return NotFound();
             }
 
-            return View(hoaDonPhong);
+            return View(sinhVien);
         }
 
-        // GET: Admin/HoaDonPhong/Create
+        // GET: Admin/SinhViens/Create
         public IActionResult Create()
         {
-            ViewData["Mssv"] = new SelectList(_context.SinhViens, "Mssv", "Mssv");
+            ViewData["Mp"] = new SelectList(_context.Phongs, "Mp", "KhuVuc");
             return View();
         }
 
-        // POST: Admin/HoaDonPhong/Create
+        // POST: Admin/SinhViens/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("MaHoaDon,Quy,SoTien,TrangThai,Mssv")] HoaDonPhong hoaDonPhong)
+        public async Task<IActionResult> Create([Bind("Mssv,HoTen,GioiTinh,NgaySinh,Lop,Khoa,Sdt,Mp,SoGiuong,MatKhau")] SinhVien sinhVien)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(hoaDonPhong);
+                _context.Add(sinhVien);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Mssv"] = new SelectList(_context.SinhViens, "Mssv", "Mssv", hoaDonPhong.Mssv);
-            return View(hoaDonPhong);
+            ViewData["Mp"] = new SelectList(_context.Phongs, "Mp", "KhuVuc", sinhVien.Mp);
+            return View(sinhVien);
         }
 
-        // GET: Admin/HoaDonPhong/Edit/5
+        // GET: Admin/SinhViens/Edit/5
         public async Task<IActionResult> Edit(string id)
         {
-            if (id == null || _context.HoaDonPhongs == null)
+            if (id == null || _context.SinhViens == null)
             {
                 return NotFound();
             }
 
-            var hoaDonPhong = await _context.HoaDonPhongs.FindAsync(id);
-            if (hoaDonPhong == null)
+            var sinhVien = await _context.SinhViens.FindAsync(id);
+            if (sinhVien == null)
             {
                 return NotFound();
             }
-            ViewData["Mssv"] = new SelectList(_context.SinhViens, "Mssv", "Mssv", hoaDonPhong.Mssv);
-            return View(hoaDonPhong);
+            ViewData["Mp"] = new SelectList(_context.Phongs, "Mp", "KhuVuc", sinhVien.Mp);
+            return View(sinhVien);
         }
 
-        // POST: Admin/HoaDonPhong/Edit/5
+        // POST: Admin/SinhViens/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("MaHoaDon,Quy,SoTien,TrangThai,Mssv")] HoaDonPhong hoaDonPhong)
+        public async Task<IActionResult> Edit(string id, [Bind("Mssv,HoTen,GioiTinh,NgaySinh,Lop,Khoa,Sdt,Mp,SoGiuong,MatKhau")] SinhVien sinhVien)
         {
-            if (id != hoaDonPhong.MaHoaDon)
+            if (id != sinhVien.Mssv)
             {
                 return NotFound();
             }
@@ -104,12 +102,12 @@ namespace QuanLiKyTucXa.Areas.Admin.Controllers
             {
                 try
                 {
-                    _context.Update(hoaDonPhong);
+                    _context.Update(sinhVien);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!HoaDonPhongExists(hoaDonPhong.MaHoaDon))
+                    if (!SinhVienExists(sinhVien.Mssv))
                     {
                         return NotFound();
                     }
@@ -120,51 +118,51 @@ namespace QuanLiKyTucXa.Areas.Admin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Mssv"] = new SelectList(_context.SinhViens, "Mssv", "Mssv", hoaDonPhong.Mssv);
-            return View(hoaDonPhong);
+            ViewData["Mp"] = new SelectList(_context.Phongs, "Mp", "KhuVuc", sinhVien.Mp);
+            return View(sinhVien);
         }
 
-        // GET: Admin/HoaDonPhong/Delete/5
+        // GET: Admin/SinhViens/Delete/5
         public async Task<IActionResult> Delete(string id)
         {
-            if (id == null || _context.HoaDonPhongs == null)
+            if (id == null || _context.SinhViens == null)
             {
                 return NotFound();
             }
 
-            var hoaDonPhong = await _context.HoaDonPhongs
-                .Include(h => h.MssvNavigation)
-                .FirstOrDefaultAsync(m => m.MaHoaDon == id);
-            if (hoaDonPhong == null)
+            var sinhVien = await _context.SinhViens
+                .Include(s => s.MpNavigation)
+                .FirstOrDefaultAsync(m => m.Mssv == id);
+            if (sinhVien == null)
             {
                 return NotFound();
             }
 
-            return View(hoaDonPhong);
+            return View(sinhVien);
         }
 
-        // POST: Admin/HoaDonPhong/Delete/5
+        // POST: Admin/SinhViens/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
-            if (_context.HoaDonPhongs == null)
+            if (_context.SinhViens == null)
             {
-                return Problem("Entity set 'QlktxContext.HoaDonPhongs'  is null.");
+                return Problem("Entity set 'QlktxContext.SinhViens'  is null.");
             }
-            var hoaDonPhong = await _context.HoaDonPhongs.FindAsync(id);
-            if (hoaDonPhong != null)
+            var sinhVien = await _context.SinhViens.FindAsync(id);
+            if (sinhVien != null)
             {
-                _context.HoaDonPhongs.Remove(hoaDonPhong);
+                _context.SinhViens.Remove(sinhVien);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool HoaDonPhongExists(string id)
+        private bool SinhVienExists(string id)
         {
-          return (_context.HoaDonPhongs?.Any(e => e.MaHoaDon == id)).GetValueOrDefault();
+          return (_context.SinhViens?.Any(e => e.Mssv == id)).GetValueOrDefault();
         }
     }
 }
