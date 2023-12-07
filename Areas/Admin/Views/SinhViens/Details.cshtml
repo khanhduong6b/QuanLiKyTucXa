@@ -4,10 +4,9 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1>Thông tin chi tiết sinh viên</h1>
 
 <div>
-    <h4>SinhVien</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -20,7 +19,16 @@
             @Html.DisplayNameFor(model => model.GioiTinh)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.GioiTinh)
+            @if (Model.GioiTinh)
+            {
+                <span>Nam</span>
+            }
+            else
+            {
+                <span>Nữ</span>
+            }
+
+
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.NgaySinh)
@@ -59,7 +67,7 @@
             @Html.DisplayFor(model => model.MatKhau)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MpNavigation)
+            Khu vực
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.MpNavigation.KhuVuc)

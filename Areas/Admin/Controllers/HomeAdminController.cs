@@ -4,7 +4,7 @@ using QuanLiKyTucXa.Helper;
 namespace QuanLiKyTucXa.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Check]
+    //[Check]
     [Route("/Admin/HomeAdmin/[action]")]
     public class HomeAdminController : Controller
     {

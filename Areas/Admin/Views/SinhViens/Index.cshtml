@@ -7,22 +7,19 @@
 <h1>Quản lý sinh viên</h1>
 
 <p>
-    <a asp-action="Create">Thêm mới</a>
+    <a asp-action="Create" asp-area="Admin" asp-controller="SinhViens">Thêm mới</a>
 </p>
 <table class="table">
     <thead>
         <tr>
-            <tr>
+            <th>
                 @Html.DisplayNameFor(model => model.Mssv)
-            </tr>
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.HoTen)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.GioiTinh)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NgaySinh)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Lop)
@@ -37,10 +34,7 @@
                 @Html.DisplayNameFor(model => model.SoGiuong)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.MatKhau)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MpNavigation)
+                Khu vực
             </th>
             <th></th>
         </tr>
@@ -55,10 +49,15 @@
                 @Html.DisplayFor(modelItem => item.HoTen)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.GioiTinh)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NgaySinh)
+                    @if(item.GioiTinh)
+                    {
+                        <span>Nam</span>
+                    }
+                    else
+                    {
+                        <span>Nữ</span>
+                    }
+                    
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Lop)
@@ -73,13 +72,10 @@
                 @Html.DisplayFor(modelItem => item.SoGiuong)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.MatKhau)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.MpNavigation.KhuVuc)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Mssv">Chỉnh sửa</a> |
+                <a asp-action="Edit"  asp-route-id="@item.Mssv">Chỉnh sửa</a> |
                 <a asp-action="Details" asp-route-id="@item.Mssv">Chi tiết</a> |
                 <a asp-action="Delete" asp-route-id="@item.Mssv">Xoá</a>
             </td>

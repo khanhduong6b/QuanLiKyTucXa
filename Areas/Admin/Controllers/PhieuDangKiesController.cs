@@ -12,7 +12,7 @@ namespace QuanLiKyTucXa.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Route("/Admin/PhieuDangKies/[action]")]
-    [Check]
+    //[Check]
 
     public class PhieuDangKiesController : Controller
     {
@@ -57,8 +57,6 @@ namespace QuanLiKyTucXa.Areas.Admin.Controllers
         }
 
         // POST: Admin/PhieuDangKies/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("MaHoSo,Mssv,TinhTrang")] PhieuDangKy phieuDangKy)
@@ -91,8 +89,6 @@ namespace QuanLiKyTucXa.Areas.Admin.Controllers
         }
 
         // POST: Admin/PhieuDangKies/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(string id, [Bind("MaHoSo,Mssv,TinhTrang")] PhieuDangKy phieuDangKy)

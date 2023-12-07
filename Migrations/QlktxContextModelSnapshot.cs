@@ -43,7 +43,7 @@ namespace QuanLiKyTucXa.Migrations
                     b.HasIndex("TaiKhoan")
                         .IsUnique();
 
-                    b.ToTable("AdminAccounts");
+                    b.ToTable("AdminAccounts", (string)null);
                 });
 
             modelBuilder.Entity("QuanLiKyTucXa.Models.GiuongNgu", b =>

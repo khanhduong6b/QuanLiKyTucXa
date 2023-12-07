@@ -12,7 +12,7 @@ namespace QuanLiKyTucXa.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Route("/Admin/HoaDonPhongs/[action]")]
-    [Check]
+    //[Check]
     public class HoaDonPhongsController : Controller
     {
         private readonly QlktxContext _context;
@@ -56,8 +56,6 @@ namespace QuanLiKyTucXa.Areas.Admin.Controllers
         }
 
         // POST: Admin/HoaDonPhongs/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("MaHoaDon,Quy,SoTien,TrangThai,Mssv")] HoaDonPhong hoaDonPhong)
@@ -90,8 +88,6 @@ namespace QuanLiKyTucXa.Areas.Admin.Controllers
         }
 
         // POST: Admin/HoaDonPhongs/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(string id, [Bind("MaHoaDon,Quy,SoTien,TrangThai,Mssv")] HoaDonPhong hoaDonPhong)
