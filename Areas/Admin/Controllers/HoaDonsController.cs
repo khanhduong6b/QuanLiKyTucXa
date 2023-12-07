@@ -59,6 +59,12 @@ namespace QuanLiKyTucXa.Areas.Admin.Controllers
                 {
                     ViewData["MpFormHD"] = checkMp;
                     ViewBag.MaPhong = id;
+                    var hd = _context.HoaDons.OrderByDescending(hd => hd.Thang).FirstOrDefault(hd => hd.Mp==id);
+                    if (hd != null)
+                    {
+                        ViewBag.chiSoDau = hd.ChiSoCuoi;
+                    }
+                    else ViewBag.chiSoDau = 0;
                 }
             }
             else
