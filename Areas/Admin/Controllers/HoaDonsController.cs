@@ -12,7 +12,7 @@ namespace QuanLiKyTucXa.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Route("/Admin/HoaDons/[action]")]
-    [Check]
+    //[Check]
     public class HoaDonsController : Controller
     {
         private readonly QlktxContext _context;
@@ -49,9 +49,16 @@ namespace QuanLiKyTucXa.Areas.Admin.Controllers
         }
 
         // GET: Admin/HoaDons/Create
-        public IActionResult Create()
+        [HttpGet("{id}")]
+        public IActionResult Create(int ?id = null)
         {
-            ViewData["Mp"] = new SelectList(_context.Phongs, "Mp", "KhuVuc");
+            if (id != null)
+            {
+                var checkMp = _context.Phongs.SingleOrDefault(p => p.Mp == id);
+                if(checkMp != null) ViewData["MpFormHD"] = checkMp;
+            }
+            else
+                ViewData["Mp"] = new SelectList(_context.Phongs, "Mp", "KhuVuc");
             return View();
         }
 
