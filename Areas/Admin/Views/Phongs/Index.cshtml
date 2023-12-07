@@ -4,14 +4,17 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Quản lý Phòng</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Thêm phòng mới</a>
 </p>
 <table class="table">
     <thead>
         <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Mp)
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.SoLuongSvToiDa)
             </th>
@@ -28,6 +31,9 @@
 @foreach (var item in Model) {
         <tr>
             <td>
+                @Html.DisplayFor(modelItem => item.Mp)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.SoLuongSvToiDa)
             </td>
             <td>
@@ -37,9 +43,9 @@
                 @Html.DisplayFor(modelItem => item.KhuVucNavigation.KhuVuc)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Mp">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Mp">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Mp">Delete</a> |
+                <a asp-action="Edit" asp-route-id="@item.Mp">Chỉnh sửa</a> |
+                <a asp-action="Details" asp-route-id="@item.Mp">Chi tiết</a> |
+                <a asp-action="Delete" asp-route-id="@item.Mp">Xoá</a> |
                 <a asp-action="Create" asp-controller="HoaDons" asp-area="Admin" asp-route-id="@item.Mp">Thêm Hóa Đơn</a>
 
             </td>

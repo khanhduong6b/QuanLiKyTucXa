@@ -55,7 +55,11 @@ namespace QuanLiKyTucXa.Areas.Admin.Controllers
             if (id != null)
             {
                 var checkMp = _context.Phongs.SingleOrDefault(p => p.Mp == id);
-                if(checkMp != null) ViewData["MpFormHD"] = checkMp;
+                if (checkMp != null)
+                {
+                    ViewData["MpFormHD"] = checkMp;
+                    ViewBag.MaPhong = id;
+                }
             }
             else
                 ViewData["Mp"] = new SelectList(_context.Phongs, "Mp", "KhuVuc");
