@@ -54,6 +54,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.MaHoaDon">Chỉnh sửa</a> |
-    <a asp-action="Index">Quay lại</a>
+    <a asp-action="Edit" asp-controller="HoaDons" asp-area="Admin" asp-route-id="@Model?.MaHoaDon">Chỉnh sửa</a> |
+    <a asp-action="Index" asp-controller="HoaDons" asp-area="Admin">Quay lại</a>
 </div>

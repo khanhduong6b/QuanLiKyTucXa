@@ -71,6 +71,7 @@ namespace QuanLiKyTucXa.Areas.Admin.Controllers
         }
 
         // GET: Admin/HoaDonPhongs/Edit/5
+        [HttpGet("{id}")]
         public async Task<IActionResult> Edit(string id)
         {
             if (id == null || _context.HoaDonPhongs == null)
@@ -88,7 +89,7 @@ namespace QuanLiKyTucXa.Areas.Admin.Controllers
         }
 
         // POST: Admin/HoaDonPhongs/Edit/5
-        [HttpPost]
+        [HttpPost("{id}")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(string id, [Bind("MaHoaDon,Quy,SoTien,TrangThai,Mssv")] HoaDonPhong hoaDonPhong)
         {
@@ -122,6 +123,7 @@ namespace QuanLiKyTucXa.Areas.Admin.Controllers
         }
 
         // GET: Admin/HoaDonPhongs/Delete/5
+        [HttpGet("{id}")]
         public async Task<IActionResult> Delete(string id)
         {
             if (id == null || _context.HoaDonPhongs == null)
@@ -141,7 +143,7 @@ namespace QuanLiKyTucXa.Areas.Admin.Controllers
         }
 
         // POST: Admin/HoaDonPhongs/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost("{id}"), ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {

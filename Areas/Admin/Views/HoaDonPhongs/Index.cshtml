@@ -7,7 +7,7 @@
 <h1>Quản lý hoá đơn phòng</h1>
 
 <p>
-    <a asp-action="Create">Thêm mới</a>
+    <a asp-action="Create" asp-area="Admin" asp-controller="HoaDonPhongs">Thêm mới</a>
 </p>
 <table class="table">
     <thead>
@@ -43,9 +43,9 @@
                 @Html.DisplayFor(modelItem => item.MssvNavigation.Mssv)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.MaHoaDon">Chỉnh sửa</a> |
-                <a asp-action="Details" asp-route-id="@item.MaHoaDon">Chi tiết</a> |
-                <a asp-action="Delete" asp-route-id="@item.MaHoaDon">Xoá</a>
+                    <a asp-action="Edit" asp-area="Admin" asp-controller="HoaDonPhongs" asp-route-id="@item.MaHoaDon">Chỉnh sửa</a> |
+                    <a asp-action="Details" asp-area="Admin" asp-controller="HoaDonPhongs" asp-route-id="@item.MaHoaDon">Chi tiết</a> |
+                    <a asp-action="Delete" asp-area="Admin" asp-controller="HoaDonPhongs" asp-route-id="@item.MaHoaDon">Xoá</a>
             </td>
         </tr>
 }
