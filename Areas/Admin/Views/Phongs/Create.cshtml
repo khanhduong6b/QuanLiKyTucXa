@@ -8,8 +8,8 @@
 
 <hr />
 <div class="row">
-    <div class="col-md-4" >
-        <form asp-action="Create" method="post" asp-validation-summary="ModelOnly" >
+    <div class="col-md-4">
+        <form asp-action="Create" asp-area="Admin" asp-controller="Phongs" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Mp" class="control-label"></label>
@@ -38,6 +38,6 @@
 </div>
 
 <div>
-    <a asp-action="Index">Quay lại</a>
+    <a asp-action="Index" asp-area="Admin" asp-controller="Phongs">Quay lại</a>
 </div>
 

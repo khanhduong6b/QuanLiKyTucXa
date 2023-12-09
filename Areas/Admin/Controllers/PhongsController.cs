@@ -57,8 +57,6 @@ namespace QuanLiKyTucXa.Areas.Admin.Controllers
         }
 
         // POST: Admin/Phongs/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Mp,SoLuongSvToiDa,SoLuongSvHienTai,KhuVuc")] Phong phong)
@@ -81,7 +79,9 @@ namespace QuanLiKyTucXa.Areas.Admin.Controllers
             return View(phong);
         }
 
+
         // GET: Admin/Phongs/Edit/5
+        [HttpGet("{id}")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Phongs == null)
@@ -99,11 +99,9 @@ namespace QuanLiKyTucXa.Areas.Admin.Controllers
         }
 
         // POST: Admin/Phongs/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        [HttpPost("{id}")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Mp,SoLuongSvToiDa,SoLuongSvHienTai,KhuVuc")] Phong phong)
+        public async Task<IActionResult> Edit(int id, Phong phong)
         {
             if (id != phong.Mp)
             {
@@ -134,7 +132,9 @@ namespace QuanLiKyTucXa.Areas.Admin.Controllers
             return View(phong);
         }
 
+
         // GET: Admin/Phongs/Delete/5
+        [HttpGet("{id}")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Phongs == null)
@@ -153,8 +153,9 @@ namespace QuanLiKyTucXa.Areas.Admin.Controllers
             return View(phong);
         }
 
+
         // POST: Admin/Phongs/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost("{id}"), ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int id)
         {

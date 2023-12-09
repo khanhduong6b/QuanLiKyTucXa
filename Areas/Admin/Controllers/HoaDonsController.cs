@@ -49,7 +49,6 @@ namespace QuanLiKyTucXa.Areas.Admin.Controllers
         }
 
         // GET: Admin/HoaDons/Create
-        [HttpGet("{id}")]
         public IActionResult Create(int ?id = null)
         {
             if (id != null)
@@ -73,8 +72,6 @@ namespace QuanLiKyTucXa.Areas.Admin.Controllers
         }
 
         // POST: Admin/HoaDons/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("MaHoaDon,Thang,ChiSoDau,ChiSoCuoi,GiaDien,GiaNuoc,TrangThai,Mp")] HoaDon hoaDon)
@@ -107,8 +104,6 @@ namespace QuanLiKyTucXa.Areas.Admin.Controllers
         }
 
         // POST: Admin/HoaDons/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("MaHoaDon,Thang,ChiSoDau,ChiSoCuoi,GiaDien,GiaNuoc,TrangThai,Mp")] HoaDon hoaDon)

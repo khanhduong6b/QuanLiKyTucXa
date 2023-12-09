@@ -30,9 +30,9 @@
         </dd>
     </dl>
     
-    <form asp-action="Delete">
+    <form asp-action="Delete" asp-area="Admin" asp-controller="Phongs">
         <input type="hidden" asp-for="Mp" />
         <input type="submit" value="Xoá" class="btn btn-danger" /> |
-        <a asp-action="Index">Quay lại</a>
+        <a asp-action="Index" asp-area="Admin" asp-controller="Phongs">Quay lại</a>
     </form>
 </div>

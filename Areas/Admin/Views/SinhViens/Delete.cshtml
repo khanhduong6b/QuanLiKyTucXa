@@ -67,7 +67,7 @@
         </dd>
     </dl>
     
-    <form asp-action="Delete">
+    <form asp-action="Delete" asp-controller="SinhViens" asp-area="Admin">
         <input type="hidden" asp-for="Mssv" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
         <a asp-action="Index">Quay lại</a>

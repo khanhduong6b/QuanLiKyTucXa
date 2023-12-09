@@ -6,9 +6,9 @@
 
 <h1>Quản lý hoá đơn</h1>
 
-@* <p>
-    <a asp-action="Create">Create New</a>
-</p> *@
+ <p>
+    <a asp-action="Create" asp-controller="HoaDons" asp-area="Admin">Create New</a>
+</p> 
 <table class="table">
     <thead>
         <tr>
@@ -61,9 +61,9 @@
                 @Html.DisplayFor(modelItem => item.MpNavigation.Mp)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.MaHoaDon">Chỉnh sửa</a> |
-                <a asp-action="Details" asp-route-id="@item.MaHoaDon">Chi tiết</a> |
-                <a asp-action="Delete" asp-route-id="@item.MaHoaDon">Xoá</a>
+                    <a asp-action="Edit" asp-controller="HoaDons" asp-area="Admin" asp-route-id="@item.MaHoaDon">Chỉnh sửa</a> |
+                    <a asp-action="Details" asp-controller="HoaDons" asp-area="Admin" asp-route-id="@item.MaHoaDon">Chi tiết</a> |
+                    <a asp-action="Delete" asp-controller="HoaDons" asp-area="Admin" asp-route-id="@item.MaHoaDon">Xoá</a>
             </td>
         </tr>
 }

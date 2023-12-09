@@ -59,7 +59,7 @@ namespace QuanLiKyTucXa.Areas.Admin.Controllers
         // POST: Admin/PhieuDangKies/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("MaHoSo,Mssv,TinhTrang")] PhieuDangKy phieuDangKy)
+        public async Task<IActionResult> Create(PhieuDangKy phieuDangKy)
         {
             if (ModelState.IsValid)
             {
@@ -67,11 +67,14 @@ namespace QuanLiKyTucXa.Areas.Admin.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            else
+                ModelState.AddModelError("", " đã xảy ra lỗi");
             ViewData["Mssv"] = new SelectList(_context.SinhViens, "Mssv", "Mssv", phieuDangKy.Mssv);
             return View(phieuDangKy);
         }
 
         // GET: Admin/PhieuDangKies/Edit/5
+        [HttpGet("{id}")]
         public async Task<IActionResult> Edit(string id)
         {
             if (id == null || _context.PhieuDangKies == null)
@@ -89,7 +92,7 @@ namespace QuanLiKyTucXa.Areas.Admin.Controllers
         }
 
         // POST: Admin/PhieuDangKies/Edit/5
-        [HttpPost]
+        [HttpPost("{id}")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(string id, [Bind("MaHoSo,Mssv,TinhTrang")] PhieuDangKy phieuDangKy)
         {
@@ -123,6 +126,7 @@ namespace QuanLiKyTucXa.Areas.Admin.Controllers
         }
 
         // GET: Admin/PhieuDangKies/Delete/5
+        [HttpGet("{id}")]
         public async Task<IActionResult> Delete(string id)
         {
             if (id == null || _context.PhieuDangKies == null)
@@ -142,7 +146,7 @@ namespace QuanLiKyTucXa.Areas.Admin.Controllers
         }
 
         // POST: Admin/PhieuDangKies/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost("{id}"), ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {

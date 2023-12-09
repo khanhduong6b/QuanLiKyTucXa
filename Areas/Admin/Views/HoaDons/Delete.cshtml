@@ -55,7 +55,7 @@
         </dd>
     </dl>
     
-    <form asp-action="Delete">
+    <form asp-action="Delete" asp-controller="HoaDons" asp-area="Admin">
         <input type="hidden" asp-for="MaHoaDon" />
         <input type="submit" value="Xoá" class="btn btn-danger" /> |
         <a asp-action="Index">Quay lại</a>

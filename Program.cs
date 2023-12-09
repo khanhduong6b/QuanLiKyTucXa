@@ -12,7 +12,6 @@ builder.Services.AddSession(options =>
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
 });
-
 builder.Services.AddScoped<HasPassword>();
 var connectionString = builder.Configuration.GetConnectionString("QLKTXContext");
 builder.Services.AddDbContext<QlktxContext>(options => options.UseSqlServer(connectionString));

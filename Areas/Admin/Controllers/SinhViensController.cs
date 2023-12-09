@@ -72,6 +72,7 @@ namespace QuanLiKyTucXa.Areas.Admin.Controllers
         }
 
         // GET: Admin/SinhViens/Edit/5
+        [HttpGet("{id}")]
         public async Task<IActionResult> Edit(string id)
         {
             if (id == null || _context.SinhViens == null)
@@ -89,7 +90,7 @@ namespace QuanLiKyTucXa.Areas.Admin.Controllers
         }
 
         // POST: Admin/SinhViens/Edit/5
-        [HttpPost]
+        [HttpPost("{id}")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(string id, [Bind("Mssv,HoTen,GioiTinh,NgaySinh,Lop,Khoa,Sdt,Mp,SoGiuong,MatKhau")] SinhVien sinhVien)
         {
@@ -123,6 +124,7 @@ namespace QuanLiKyTucXa.Areas.Admin.Controllers
         }
 
         // GET: Admin/SinhViens/Delete/5
+        [HttpGet("{id}")]
         public async Task<IActionResult> Delete(string id)
         {
             if (id == null || _context.SinhViens == null)
@@ -142,7 +144,7 @@ namespace QuanLiKyTucXa.Areas.Admin.Controllers
         }
 
         // POST: Admin/SinhViens/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost("{id}"), ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
