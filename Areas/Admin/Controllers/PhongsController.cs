@@ -65,9 +65,17 @@ namespace QuanLiKyTucXa.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(phong);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if (_context.Phongs.Find(phong.Mp) == null)
+                {
+                    _context.Add(phong);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                else
+                {
+                    ModelState.AddModelError("Mp", "Mã phòng bị trùng!");
+                    return View(phong);
+                }
             }
             ViewData["KhuVuc"] = new SelectList(_context.Khus, "KhuVuc", "KhuVuc", phong.KhuVuc);
             return View(phong);
@@ -148,7 +156,7 @@ namespace QuanLiKyTucXa.Areas.Admin.Controllers
         // POST: Admin/Phongs/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             if (_context.Phongs == null)
             {

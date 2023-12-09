@@ -34,7 +34,7 @@
                 @Html.DisplayNameFor(model => model.SoGiuong)
             </th>
             <th>
-                Khu vực
+                @Html.DisplayNameFor(model => model.Mp)
             </th>
             <th></th>
         </tr>
@@ -72,7 +72,7 @@
                 @Html.DisplayFor(modelItem => item.SoGiuong)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.MpNavigation.KhuVuc)
+                @Html.DisplayFor(modelItem => item.MpNavigation.Mp)
             </td>
             <td>
                 <a asp-action="Edit"  asp-route-id="@item.Mssv">Chỉnh sửa</a> |
