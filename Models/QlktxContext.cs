@@ -69,7 +69,9 @@ public partial class QlktxContext : DbContext
             entity.Property(e => e.ChiSoDau).HasColumnName("chiSoDau");
             entity.Property(e => e.GiaDien).HasColumnName("giaDien");
             entity.Property(e => e.GiaNuoc).HasColumnName("giaNuoc");
-            entity.Property(e => e.Thang).HasColumnName("thang");
+            entity.Property(e => e.Thang)
+                .HasColumnType("date")
+                .HasColumnName("thang");
             entity.Property(e => e.TrangThai).HasColumnName("trangThai");
             entity.Property(e => e.Mp).HasColumnName("maPhong");
 
@@ -142,8 +144,10 @@ public partial class QlktxContext : DbContext
                 .IsUnicode(false)
                 .IsFixedLength()
                 .HasColumnName("mssv");
+            entity.Property(e => e.NgayVao)
+                .HasColumnType("date")
+                .HasColumnName("ngayVao");
             entity.Property(e => e.TinhTrang)
-                .HasMaxLength(50)
                 .HasColumnName("tinhTrang");
 
             entity.HasOne(d => d.MssvNavigation).WithMany(p => p.PhieuDangKys)

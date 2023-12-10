@@ -12,8 +12,8 @@ using QuanLiKyTucXa.Models;
 namespace QuanLiKyTucXa.Migrations
 {
     [DbContext(typeof(QlktxContext))]
-    [Migration("20231209173825_V1")]
-    partial class V1
+    [Migration("20231210120937_V0")]
+    partial class V0
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -103,8 +103,8 @@ namespace QuanLiKyTucXa.Migrations
                         .HasColumnType("int")
                         .HasColumnName("maPhong");
 
-                    b.Property<int>("Thang")
-                        .HasColumnType("int")
+                    b.Property<DateTime>("Thang")
+                        .HasColumnType("date")
                         .HasColumnName("thang");
 
                     b.Property<int>("TrangThai")
@@ -198,10 +198,12 @@ namespace QuanLiKyTucXa.Migrations
                         .HasColumnName("mssv")
                         .IsFixedLength();
 
-                    b.Property<string>("TinhTrang")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)")
+                    b.Property<DateTime>("NgayVao")
+                        .HasColumnType("date")
+                        .HasColumnName("ngayVao");
+
+                    b.Property<int>("TinhTrang")
+                        .HasColumnType("int")
                         .HasColumnName("tinhTrang");
 
                     b.HasKey("MaHoSo");

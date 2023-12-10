@@ -59,26 +59,31 @@ namespace QuanLiKyTucXa.Areas.Admin.Controllers
         // POST: Admin/SinhViens/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Mssv,HoTen,GioiTinh,NgaySinh,Lop,Khoa,Sdt,Mp,SoGiuong,MatKhau")] SinhVien sinhVien)
+        public async Task<IActionResult> Create([Bind("Mssv,HoTen,GioiTinh,NgaySinh,Lop,Khoa,Sdt,Mp,SoGiuong,MatKhau,TinhTrang")] SinhVien sinhVien)
         {
             if (ModelState.IsValid)
             {  
                 var phong = await _context.Phongs.FindAsync(sinhVien.Mp);
                 if (phong != null)
                 {
-                    if (phong.SoLuongSvHienTai < phong.SoLuongSvToiDa)
-                    {
-                        phong.SoLuongSvHienTai++;
-                        _context.Update(phong);
-                        _context.Add(sinhVien);
-                        await _context.SaveChangesAsync();
-                    }
+                    if (sinhVien.TinhTrang)
+                        if (phong.SoLuongSvHienTai < phong.SoLuongSvToiDa)
+                        {
+                            phong.SoLuongSvHienTai++;
+                            _context.Update(phong);
+                            _context.Add(sinhVien);
+                            await _context.SaveChangesAsync();
+                        }
+                        else
+                        {
+                            ModelState.AddModelError("Mp", "Phòng không còn chỗ trống");
+                            ViewData["Mp"] = new SelectList(_context.Phongs, "Mp", "Mp", sinhVien.Mp);
+                            return View(sinhVien);
+                        }
                     else
                     {
-                        ModelState.AddModelError("Mp", "Phòng không còn chỗ trống");
-
-                        ViewData["Mp"] = new SelectList(_context.Phongs, "Mp", "Mp", sinhVien.Mp);
-                        return View(sinhVien);
+                        _context.Add(sinhVien);
+                        await _context.SaveChangesAsync();
                     }
                 }
                     await _context.SaveChangesAsync();
@@ -102,14 +107,14 @@ namespace QuanLiKyTucXa.Areas.Admin.Controllers
             {
                 return NotFound();
             }
-            ViewData["Mp"] = new SelectList(_context.Phongs, "Mp", "KhuVuc", sinhVien.Mp);
+            ViewData["Mp"] = new SelectList(_context.Phongs, "Mp", "Mp", sinhVien.Mp);
             return View(sinhVien);
         }
 
         // POST: Admin/SinhViens/Edit/5
         [HttpPost("{id}")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Mssv,HoTen,GioiTinh,NgaySinh,Lop,Khoa,Sdt,Mp,SoGiuong,MatKhau")] SinhVien sinhVien)
+        public async Task<IActionResult> Edit(string id, [Bind("Mssv,HoTen,GioiTinh,NgaySinh,Lop,Khoa,Sdt,Mp,SoGiuong,MatKhau,TinhTrang")] SinhVien sinhVien)
         {
             if (id != sinhVien.Mssv)
             {
@@ -120,7 +125,59 @@ namespace QuanLiKyTucXa.Areas.Admin.Controllers
             {
                 try
                 {
-                    _context.Update(sinhVien);
+                    var existingSinhVien = await _context.SinhViens.FindAsync(id);
+                    var existingPhong = await _context.Phongs.FindAsync(existingSinhVien.Mp);
+
+                    if (existingSinhVien != null && existingPhong != null)
+                    {
+                        // Nếu đổi phòng
+                        if (existingSinhVien.Mp != sinhVien.Mp)
+                        {
+                            var newPhong = await _context.Phongs.FindAsync(sinhVien.Mp);
+
+                            if (newPhong != null && sinhVien.TinhTrang)
+                            {
+                                // Kiểm tra số lượng hiện tại và số lượng tối đa của phòng mới
+                                if (newPhong.SoLuongSvHienTai < newPhong.SoLuongSvToiDa)
+                                {
+                                    // Giảm số lượng sinh viên hiện tại của phòng cũ
+                                    existingPhong.SoLuongSvHienTai--;
+
+                                    // Tăng số lượng sinh viên hiện tại của phòng mới
+                                    newPhong.SoLuongSvHienTai++;
+
+                                    _context.Update(existingPhong);
+                                    _context.Update(newPhong);
+                                }
+                                else
+                                {
+                                    ModelState.AddModelError("Mp", "Phòng không còn chỗ trống");
+                                    ViewData["Mp"] = new SelectList(_context.Phongs, "Mp", "KhuVuc", sinhVien.Mp);
+                                    return View(sinhVien);
+                                }
+                            }
+                        }
+
+                        // Nếu đổi tình trạng nhưng không đổi phòng
+                        if (existingSinhVien.TinhTrang != sinhVien.TinhTrang)
+                        {
+                            if (sinhVien.TinhTrang)
+                            {
+                                // Tăng số lượng sinh viên hiện tại của phòng
+                                existingPhong.SoLuongSvHienTai++;
+                                _context.Update(existingPhong);
+                            }
+                            else
+                            {
+                                // Giảm số lượng sinh viên hiện tại của phòng
+                                existingPhong.SoLuongSvHienTai--;
+                                _context.Update(existingPhong);
+                            }
+                        }
+                    }
+
+                    // Cập nhật thông tin sinh viên
+                    _context.Entry(existingSinhVien).CurrentValues.SetValues(sinhVien);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -140,6 +197,7 @@ namespace QuanLiKyTucXa.Areas.Admin.Controllers
             return View(sinhVien);
         }
 
+
         // GET: Admin/SinhViens/Delete/5
         [HttpGet("{id}")]
         public async Task<IActionResult> Delete(string id)
@@ -157,6 +215,14 @@ namespace QuanLiKyTucXa.Areas.Admin.Controllers
                 return NotFound();
             }
 
+            var a = _context.HoaDonPhongs.Where(h => h.Mssv == id).ToList().Count;
+            var b = _context.PhieuDangKies.Where(p => p.Mssv == id).ToList().Count;
+            if (a > 0 || b>0)
+            {
+                ViewBag.Delete = false;
+            }
+            else ViewBag.Delete = true;
+
             return View(sinhVien);
         }
 
@@ -171,9 +237,16 @@ namespace QuanLiKyTucXa.Areas.Admin.Controllers
             }
             var sinhVien = await _context.SinhViens.FindAsync(id);
             if (sinhVien != null)
-            {
+            { 
+                var phong = await _context.Phongs.FindAsync(sinhVien.Mp);
+                if (phong != null && sinhVien.TinhTrang) {
+                    phong.SoLuongSvHienTai--;
+                    _context.Phongs.Update(phong);
+                }
+
                 _context.SinhViens.Remove(sinhVien);
             }
+
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));

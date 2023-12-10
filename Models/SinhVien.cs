@@ -20,6 +20,7 @@ public partial class SinhVien
     public bool GioiTinh { get; set; }
     [Required(ErrorMessage = "Ngày sinh không được để trống")]
     [DisplayName("Ngày sinh")]
+    [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
     public DateTime NgaySinh { get; set; }
     [Required(ErrorMessage = "Lớp không được để trống")]
     [DisplayName("Lớp")]
@@ -36,6 +37,7 @@ public partial class SinhVien
     [DisplayName("Tình trạng ở")]
     [DefaultValue(false)]
     public bool TinhTrang { get; set; }
+    [DisplayName("Mật khẩu")]
     [Column(TypeName = "varchar(30)")]
     public string? MatKhau { get; set; }
 

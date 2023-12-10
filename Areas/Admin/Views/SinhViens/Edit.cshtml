@@ -22,14 +22,15 @@
                     @Html.DisplayNameFor(model => model.GioiTinh)
                 </label>
                 <br>
-                <input type="radio" name="gender" asp-for="GioiTinh" value="1" checked />
+                <input type="radio" asp-for="GioiTinh" value="True" />
                 Nam
-                <input type="radio" name="gender" asp-for="GioiTinh" value="0" />
+                <input type="radio" asp-for="GioiTinh" value="False" />
                 Nữ
             </div>
+
             <div class="form-group">
                 <label asp-for="NgaySinh" class="control-label"></label>
-                <input asp-for="NgaySinh" class="form-control" />
+                <input asp-for="NgaySinh" class="form-control" type="date" />
                 <span asp-validation-for="NgaySinh" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -52,6 +53,11 @@
                 <select asp-for="Mp" class="form-control" asp-items="ViewBag.Mp"></select>
                 <span asp-validation-for="Mp" class="text-danger"></span>
             </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="TinhTrang" /> @Html.DisplayNameFor(model => model.TinhTrang)
+                </label>
+            </div>
             <div class="form-group">
                 <label asp-for="SoGiuong" class="control-label"></label>
                 <input asp-for="SoGiuong" class="form-control" />
@@ -63,7 +69,7 @@
                 <span asp-validation-for="MatKhau" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Lưu" class="btn btn-primary" />
             </div>
         </form>
     </div>
