@@ -33,8 +33,11 @@ public partial class SinhVien
     public int? Mp { get; set; }
     [DisplayName("Số giường")]
     public int? SoGiuong { get; set; }
+    [DisplayName("Tình trạng ở")]
+    [DefaultValue(false)]
+    public bool TinhTrang { get; set; }
     [Column(TypeName = "varchar(30)")]
-    public string MatKhau { get; set; }
+    public string? MatKhau { get; set; }
 
 
     public virtual GiuongNgu? GiuongNguNavigation { get; set; }

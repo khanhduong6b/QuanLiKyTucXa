@@ -21,11 +21,15 @@
                 <input asp-for="HoTen" class="form-control" />
                 <span asp-validation-for="HoTen" class="text-danger"></span>
             </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="GioiTinh" /> @Html.DisplayNameFor(model => model.GioiTinh)
-                    Nam
+            <div class="form-group">
+                <label class="control-label">
+                    @Html.DisplayNameFor(model => model.GioiTinh)
                 </label>
+                <br>
+                <input type="radio" name="gender" asp-for="GioiTinh" value="1" checked/>
+                Nam
+                <input type="radio" name="gender" asp-for="GioiTinh" value="0"/>
+                Nữ
             </div>
             <div class="form-group">
                 <label asp-for="NgaySinh" class="control-label"></label>
@@ -49,7 +53,8 @@
             </div>
             <div class="form-group">
                 <label asp-for="Mp" class="control-label"></label>
-                <select asp-for="Mp" class ="form-control" asp-items="ViewBag.Mp"></select>
+                <select asp-for="Mp" class ="form-control" asp-items="ViewBag.Mp"></select>         
+                <span asp-validation-for="Mp" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="SoGiuong" class="control-label"></label>

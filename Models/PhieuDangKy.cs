@@ -16,7 +16,8 @@ public class PhieuDangKy
     [DisplayName("Mã sinh viên")]
     public string Mssv { get; set; }
     [DisplayName("Tình trạng")]
-    public string? TinhTrang { get; set; }
+    [Required(ErrorMessage = "Tình trạng không được để trống")]
+    public string TinhTrang { get; set; }
 
-    public virtual SinhVien MssvNavigation { get; set; }
+    public virtual SinhVien? MssvNavigation { get; set; }
 }

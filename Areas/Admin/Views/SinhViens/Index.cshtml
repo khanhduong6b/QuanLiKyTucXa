@@ -36,6 +36,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Mp)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TinhTrang)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -74,6 +77,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.MpNavigation.Mp)
             </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TinhTrang)
+                </td>
             <td>
                     <a asp-action="Edit" asp-controller="SinhViens" asp-area="Admin" asp-route-id="@item.Mssv">Chỉnh sửa</a> |
                     <a asp-action="Details" asp-controller="SinhViens" asp-area="Admin" asp-route-id="@item.Mssv">Chi tiết</a> |

@@ -208,6 +208,8 @@ public partial class QlktxContext : DbContext
                 .HasMaxLength(11)
                 .IsFixedLength()
                 .HasColumnName("sdt");
+            entity.Property(e => e.TinhTrang)
+                .HasColumnName("tinhTrang");
             entity.Property(e => e.SoGiuong).HasColumnName("soGiuong");
             entity.HasOne(d => d.MpNavigation).WithMany(p => p.SinhViens)
                 .HasForeignKey(d => d.Mp)

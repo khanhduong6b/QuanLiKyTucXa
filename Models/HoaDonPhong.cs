@@ -25,5 +25,5 @@ public partial class HoaDonPhong
     [DisplayName("Mã sinh viên")]
     public string Mssv { get; set; } = null!;
 
-    public virtual SinhVien MssvNavigation { get; set; } = null!;
+    public virtual SinhVien? MssvNavigation { get; set; } = null!;
 }

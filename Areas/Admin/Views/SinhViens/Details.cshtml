@@ -67,10 +67,16 @@
             @Html.DisplayFor(model => model.MatKhau)
         </dd>
         <dt class = "col-sm-2">
-            Khu vực
+            @Html.DisplayNameFor(model => model.Mp)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MpNavigation.KhuVuc)
+            @Html.DisplayFor(model => model.MpNavigation.Mp)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TinhTrang)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TinhTrang)
         </dd>
     </dl>
 </div>

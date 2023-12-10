@@ -62,10 +62,27 @@ namespace QuanLiKyTucXa.Areas.Admin.Controllers
         public async Task<IActionResult> Create([Bind("Mssv,HoTen,GioiTinh,NgaySinh,Lop,Khoa,Sdt,Mp,SoGiuong,MatKhau")] SinhVien sinhVien)
         {
             if (ModelState.IsValid)
-            {
-                _context.Add(sinhVien);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+            {  
+                var phong = await _context.Phongs.FindAsync(sinhVien.Mp);
+                if (phong != null)
+                {
+                    if (phong.SoLuongSvHienTai < phong.SoLuongSvToiDa)
+                    {
+                        phong.SoLuongSvHienTai++;
+                        _context.Update(phong);
+                        _context.Add(sinhVien);
+                        await _context.SaveChangesAsync();
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("Mp", "Phòng không còn chỗ trống");
+
+                        ViewData["Mp"] = new SelectList(_context.Phongs, "Mp", "Mp", sinhVien.Mp);
+                        return View(sinhVien);
+                    }
+                }
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
             }
             ViewData["Mp"] = new SelectList(_context.Phongs, "Mp", "KhuVuc", sinhVien.Mp);
             return View(sinhVien);

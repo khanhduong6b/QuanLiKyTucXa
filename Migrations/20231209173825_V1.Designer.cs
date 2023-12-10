@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using QuanLiKyTucXa.Models;
 
@@ -11,9 +12,11 @@ using QuanLiKyTucXa.Models;
 namespace QuanLiKyTucXa.Migrations
 {
     [DbContext(typeof(QlktxContext))]
-    partial class QlktxContextModelSnapshot : ModelSnapshot
+    [Migration("20231209173825_V1")]
+    partial class V1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

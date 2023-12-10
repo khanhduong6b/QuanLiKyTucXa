@@ -25,13 +25,14 @@
             <div class="form-group">
                 <label asp-for="ChiSoDau" class="control-label"></label>
                 @{
-                    if (ViewBag.chiSoDau == 0 )
-                    {
-                        <input asp-for="ChiSoDau" class="form-control" />
+                    if (ViewBag.chiSoDau > 0 )
+                    {   
+                        <input class="form-control" value="@ViewBag.chiSoDau" readonly/>
                     }
                     else
                     {
-                        <input class="form-control" value="@ViewBag.chiSoDau" readonly/>
+
+                        <input asp-for="ChiSoDau" value="0" class="form-control" readonly />
                     }
                 }
                 <span asp-validation-for="ChiSoDau" class="text-danger"></span>
