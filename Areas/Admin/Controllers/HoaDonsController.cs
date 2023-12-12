@@ -23,10 +23,16 @@ namespace QuanLiKyTucXa.Areas.Admin.Controllers
         }
 
         // GET: Admin/HoaDons
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string search = "")
         {
-            var qlktxContext = _context.HoaDons.Include(h => h.MpNavigation);
-            return View(await qlktxContext.ToListAsync());
+            List<HoaDon> listHD = new();
+            if (!string.IsNullOrEmpty(search))
+            {
+                listHD = await _context.HoaDons.Where(a => a.Thang.ToString().Contains(search)).Include(s => s.MpNavigation).ToListAsync();
+            }
+            else
+                listHD = await _context.HoaDons.Include(h => h.MpNavigation).ToListAsync();
+            return View(listHD);
         }
 
         // GET: Admin/HoaDons/Details/5

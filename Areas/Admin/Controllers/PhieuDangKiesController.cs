@@ -24,10 +24,16 @@ namespace QuanLiKyTucXa.Areas.Admin.Controllers
         }
 
         // GET: Admin/PhieuDangKies
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string search = "")
         {
-            var qlktxContext = _context.PhieuDangKies.Include(p => p.MssvNavigation);
-            return View(await qlktxContext.ToListAsync());
+            List<PhieuDangKy> listPDK = new();
+            if (!string.IsNullOrEmpty(search))
+            {
+                listPDK = await _context.PhieuDangKies.Where(a => a.MaHoSo.Contains(search)).Include(s => s.MssvNavigation).ToListAsync();
+            }
+            else
+                listPDK = await _context.PhieuDangKies.Include(p => p.MssvNavigation).ToListAsync();
+            return View(listPDK);
         }
 
         // GET: Admin/PhieuDangKies/Details/5
@@ -67,8 +73,7 @@ namespace QuanLiKyTucXa.Areas.Admin.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            else
-                ModelState.AddModelError("", " đã xảy ra lỗi");
+            
             ViewData["Mssv"] = new SelectList(_context.SinhViens, "Mssv", "Mssv", phieuDangKy.Mssv);
             return View(phieuDangKy);
         }

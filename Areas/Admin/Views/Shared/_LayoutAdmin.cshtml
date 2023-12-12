@@ -1,5 +1,7 @@
 ﻿@{
     var user = Context.Session.GetString("Username");
+
+    var ctrl = (String)ViewBag.contrl;
 }
 
 
@@ -47,10 +49,10 @@
                             <a class="nav-link dropdown-toggle hide" data-toggle="dropdown" href="#"><i class="ficon ft-search"></i></a>
                             <ul class="dropdown-menu">
                                 <li class="arrow_box">
-                                    <form>
+                                    <form asp-action="Index" asp-controller="@ctrl" asp-area="Admin">
                                         <div class="input-group search-box">
                                             <div class="position-relative has-icon-right full-width">
-                                                <input class="form-control" id="search" type="text" placeholder="Search here...">
+                                                <input class="form-control" id="search" name="search" type="text" placeholder="Search here...">
                                                 <div class="form-control-position navbar-search-close"><i class="ft-x">   </i></div>
                                             </div>
                                         </div>

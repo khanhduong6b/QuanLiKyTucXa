@@ -23,10 +23,16 @@ namespace QuanLiKyTucXa.Areas.Admin.Controllers
         }
 
         // GET: Admin/HoaDonPhongs
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string search = "")
         {
-            var qlktxContext = _context.HoaDonPhongs.Include(h => h.MssvNavigation);
-            return View(await qlktxContext.ToListAsync());
+            List<HoaDonPhong> listHDP = new();
+            if (!string.IsNullOrEmpty(search))
+            {
+                listHDP = await _context.HoaDonPhongs.Where(a => a.Quy.Contains(search)).Include(s => s.MssvNavigation).ToListAsync();
+            }
+            else
+                listHDP = await _context.HoaDonPhongs.Include(h => h.MssvNavigation).ToListAsync();
+            return View(listHDP);
         }
 
         // GET: Admin/HoaDonPhongs/Details/5
@@ -67,7 +73,7 @@ namespace QuanLiKyTucXa.Areas.Admin.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["Mssv"] = new SelectList(_context.SinhViens, "Mssv", "Mssv", hoaDonPhong.Mssv);
-            return View(hoaDonPhong);
+            return RedirectToAction("Index", "HoaDonPhongs", new { Areas = "Admin" });
         }
 
         // GET: Admin/HoaDonPhongs/Edit/5

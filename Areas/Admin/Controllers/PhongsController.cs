@@ -24,10 +24,16 @@ namespace QuanLiKyTucXa.Areas.Admin.Controllers
         }
 
         // GET: Admin/Phongs
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string search = "")
         {
-            var qlktxContext = _context.Phongs.Include(p => p.KhuVucNavigation);
-            return View(await qlktxContext.ToListAsync());
+            List<Phong> listPhong = new();
+            if (!string.IsNullOrEmpty(search))
+            {
+                listPhong = await _context.Phongs.Where(a => a.Mp.ToString().Contains(search)).Include(s => s.KhuVucNavigation).ToListAsync();
+            }
+            else
+                listPhong = await _context.Phongs.Include(h => h.KhuVucNavigation).ToListAsync();
+            return View(listPhong);
         }
 
         // GET: Admin/Phongs/Details/5

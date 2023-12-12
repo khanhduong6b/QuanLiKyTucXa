@@ -24,13 +24,18 @@ namespace QuanLiKyTucXa.Areas.Admin.Controllers
         }
 
         // GET: Admin/SinhViens
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string search = "")
         {
-            var qlktxContext = _context.SinhViens.Include(s => s.MpNavigation);
-            return View(await qlktxContext.ToListAsync());
+            List<SinhVien> listsv = new();
+            if (!string.IsNullOrEmpty(search))
+            {
+                listsv = await _context.SinhViens.Where(a => a.HoTen.Contains(search)).Include(s => s.MpNavigation).ToListAsync();
+            }
+            else
+                listsv = await _context.SinhViens.Include(s => s.MpNavigation).ToListAsync();
+            return View(listsv);
         }
 
-        // GET: Admin/SinhViens/Details/5
         public async Task<IActionResult> Details(string id)
         {
             if (id == null || _context.SinhViens == null)
@@ -41,11 +46,12 @@ namespace QuanLiKyTucXa.Areas.Admin.Controllers
             var sinhVien = await _context.SinhViens
                 .Include(s => s.MpNavigation)
                 .FirstOrDefaultAsync(m => m.Mssv == id);
+            var hdphong = await _context.HoaDonPhongs.Include(s=>s.MssvNavigation).FirstOrDefaultAsync(m => m.Mssv == id);
             if (sinhVien == null)
             {
                 return NotFound();
             }
-
+            ViewBag.hdphong = hdphong;
             return View(sinhVien);
         }
 
@@ -63,6 +69,7 @@ namespace QuanLiKyTucXa.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+
                 _context.Add(sinhVien);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

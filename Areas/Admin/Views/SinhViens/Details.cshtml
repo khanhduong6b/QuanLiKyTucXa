@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Details";
+    var hdphong = (HoaDonPhong)ViewBag.hdphong;
 }
 
 <h1>Thông tin chi tiết sinh viên</h1>
@@ -9,16 +10,16 @@
 <div>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.HoTen)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.HoTen)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.GioiTinh)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @if (Model.GioiTinh)
             {
                 <span>Nam</span>
@@ -30,50 +31,78 @@
 
 
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.NgaySinh)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.NgaySinh)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Lop)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Lop)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Khoa)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Khoa)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Sdt)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Sdt)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.SoGiuong)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.SoGiuong)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.MatKhau)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.MatKhau)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             Khu vực
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.MpNavigation.KhuVuc)
         </dd>
     </dl>
+
 </div>
+<div >
+    <hr />
+    <h3>Hóa đơn phòng</h3>
+    <dl class="row">
+        <dt class="col-sm-2">
+            Quý
+        </dt>
+        <dd class="col-sm-10">
+            @hdphong.Quy
+        </dd>
+
+        <dt class="col-sm-2">
+            Số tiền
+        </dt>
+        <dd class="col-sm-10">
+            @hdphong.SoTien
+        </dd>
+        <dt class="col-sm-2">
+            Trạng thái
+        </dt>
+        <dd class="col-sm-10">
+            @hdphong.TrangThai
+        </dd>
+    </dl>
+</div>
+
+
 <div>
     <a asp-action="Edit" asp-controller="SinhViens" asp-area="Admin" asp-route-id="@Model?.Mssv">Edit</a> |
     <a asp-action="Index" asp-controller="SinhViens" asp-area="Admin">Quay lại</a>

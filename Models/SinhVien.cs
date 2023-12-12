@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace QuanLiKyTucXa.Models;
 
-public partial class SinhVien
+public class SinhVien
 {
     [Required(ErrorMessage = "Mã sinh viên không được để trống")]
     [StringLength(10, ErrorMessage = "Mã sinh viên không được quá 10 ký tự")]
@@ -33,7 +33,9 @@ public partial class SinhVien
     public int? Mp { get; set; }
     [DisplayName("Số giường")]
     public int? SoGiuong { get; set; }
+
     [Column(TypeName = "varchar(30)")]
+    [Display(Name = "Mật khẩu")]
     public string MatKhau { get; set; }
 
 

@@ -18,5 +18,5 @@ public class PhieuDangKy
     [DisplayName("Tình trạng")]
     public string? TinhTrang { get; set; }
 
-    public virtual SinhVien MssvNavigation { get; set; }
+    public virtual SinhVien? MssvNavigation { get; set; }
 }
