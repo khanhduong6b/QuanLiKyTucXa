@@ -1,0 +1,41 @@
+﻿@model QuanLiKyTucXa.Models.HoaDonPhong
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Chi tiết hoá đơn phòng</h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Quy)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Quy)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SoTien)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SoTien)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TrangThai)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TrangThai)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Mssv)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.MssvNavigation.Mssv)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.MaHoaDon" asp-area="Admin" asp-controller="HoaDonPhongs">Chỉnh sửa</a> |
+    <a asp-action="Index">Quay lại</a>
+</div>

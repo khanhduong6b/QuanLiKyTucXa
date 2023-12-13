@@ -1,0 +1,78 @@
+﻿@model IEnumerable<QuanLiKyTucXa.Models.HoaDon>
+
+@{
+    ViewData["Title"] = "Index";
+    ViewBag.contrl = "HoaDons";
+}
+
+<h1>Quản lý hoá đơn</h1>
+
+ <p>
+    <a asp-action="Create" asp-controller="HoaDons" asp-area="Admin">Thêm mới</a>
+</p> 
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.MaHoaDon)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Thang)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ChiSoDau)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ChiSoCuoi)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GiaDien)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GiaNuoc)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TrangThai)
+            </th>
+            <th>
+                Mã phòng
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaHoaDon)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Thang)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ChiSoDau)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ChiSoCuoi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GiaDien)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GiaNuoc)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TrangThai)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MpNavigation.Mp)
+            </td>
+            <td>
+                    <a asp-action="Edit" asp-controller="HoaDons" asp-area="Admin" asp-route-id="@item.MaHoaDon">Chỉnh sửa</a> |
+                    <a asp-action="Details" asp-controller="HoaDons" asp-area="Admin" asp-route-id="@item.MaHoaDon">Chi tiết</a> |
+                    <a asp-action="Delete" asp-controller="HoaDons" asp-area="Admin" asp-route-id="@item.MaHoaDon">Xoá</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

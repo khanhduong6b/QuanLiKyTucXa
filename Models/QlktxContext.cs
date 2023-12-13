@@ -50,30 +50,33 @@ public partial class QlktxContext : DbContext
                 .IsUnicode(false)
                 .IsFixedLength()
                 .HasColumnName("mssv");
-
-            entity.HasOne(d => d.MssvNavigation).WithMany(p => p.GiuongNgus)
-                .HasForeignKey(d => d.Mssv)
-                .HasConstraintName("FK_GiuongNgu_SinhVien");
+            entity.HasOne(d => d.MpNavigation).WithMany(p => p.GiuongNgus)
+            .HasForeignKey(d => d.Mp)
+            .OnDelete(DeleteBehavior.ClientSetNull)
+            .HasConstraintName("FK_GiuongNgu_Phong");
         });
 
         modelBuilder.Entity<HoaDon>(entity =>
         {
-            entity.HasKey(e => e.Mp);
+            entity.HasKey(e => e.MaHoaDon);
 
             entity.ToTable("HoaDon");
 
-            entity.Property(e => e.Mp)
+            entity.Property(e => e.MaHoaDon)
                 .ValueGeneratedNever()
-                .HasColumnName("mp");
+                .HasColumnName("MaHoaDon");
             entity.Property(e => e.ChiSoCuoi).HasColumnName("chiSoCuoi");
             entity.Property(e => e.ChiSoDau).HasColumnName("chiSoDau");
             entity.Property(e => e.GiaDien).HasColumnName("giaDien");
             entity.Property(e => e.GiaNuoc).HasColumnName("giaNuoc");
-            entity.Property(e => e.Thang).HasColumnName("thang");
+            entity.Property(e => e.Thang)
+                .HasColumnType("date")
+                .HasColumnName("thang");
             entity.Property(e => e.TrangThai).HasColumnName("trangThai");
+            entity.Property(e => e.Mp).HasColumnName("maPhong");
 
-            entity.HasOne(d => d.MpNavigation).WithOne(p => p.HoaDon)
-                .HasForeignKey<HoaDon>(d => d.Mp)
+            entity.HasOne(d => d.MpNavigation).WithMany(p => p.HoaDons)
+                .HasForeignKey(d => d.Mp)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_HoaDon_Phong");
         });
@@ -101,7 +104,8 @@ public partial class QlktxContext : DbContext
             entity.Property(e => e.SoTien).HasColumnName("soTien");
             entity.Property(e => e.TrangThai).HasColumnName("trangThai");
 
-            entity.HasOne(d => d.MssvNavigation).WithMany(p => p.HoaDonPhongs)
+            entity.HasOne(d => d.MssvNavigation)
+                .WithMany(p => p.HoaDonPhongs)
                 .HasForeignKey(d => d.Mssv)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_HoaDonPhong_SinhVien");
@@ -140,11 +144,13 @@ public partial class QlktxContext : DbContext
                 .IsUnicode(false)
                 .IsFixedLength()
                 .HasColumnName("mssv");
+            entity.Property(e => e.NgayVao)
+                .HasColumnType("date")
+                .HasColumnName("ngayVao");
             entity.Property(e => e.TinhTrang)
-                .HasMaxLength(50)
                 .HasColumnName("tinhTrang");
 
-            entity.HasOne(d => d.MssvNavigation).WithMany(p => p.PhieuDangKies)
+            entity.HasOne(d => d.MssvNavigation).WithMany(p => p.PhieuDangKys)
                 .HasForeignKey(d => d.Mssv)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_PhieuDangKy_SinhVien");
@@ -164,8 +170,8 @@ public partial class QlktxContext : DbContext
                 .IsUnicode(false)
                 .IsFixedLength()
                 .HasColumnName("khuVuc");
-            entity.Property(e => e.SoLuongSvhienTai).HasColumnName("soLuongSVHienTai");
-            entity.Property(e => e.SoLuongSvtoiDa).HasColumnName("soLuongSVToiDa");
+            entity.Property(e => e.SoLuongSvHienTai).HasColumnName("soLuongSVHienTai");
+            entity.Property(e => e.SoLuongSvToiDa).HasColumnName("soLuongSVToiDa");
 
             entity.HasOne(d => d.KhuVucNavigation).WithMany(p => p.Phongs)
                 .HasForeignKey(d => d.KhuVuc)
@@ -206,11 +212,16 @@ public partial class QlktxContext : DbContext
                 .HasMaxLength(11)
                 .IsFixedLength()
                 .HasColumnName("sdt");
+            entity.Property(e => e.TinhTrang)
+                .HasColumnName("tinhTrang");
             entity.Property(e => e.SoGiuong).HasColumnName("soGiuong");
-
             entity.HasOne(d => d.MpNavigation).WithMany(p => p.SinhViens)
                 .HasForeignKey(d => d.Mp)
                 .HasConstraintName("FK_SinhVien_Phong");
+            entity.HasOne(d => d.GiuongNguNavigation).WithOne(p => p.MssvNavigation)
+            .HasForeignKey<GiuongNgu>(d => d.Mssv)
+            .OnDelete(DeleteBehavior.ClientSetNull)
+            .HasConstraintName("FK_SinhVien_GiuongNgu");
         });
 
         modelBuilder.Entity<AdminAccount>(e =>

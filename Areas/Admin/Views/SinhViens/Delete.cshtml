@@ -1,0 +1,99 @@
+﻿@model QuanLiKyTucXa.Models.SinhVien
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+@{
+    if (ViewBag.Delete)
+    {       
+        <h1>Bạn có muốn xoá sinh viên này?</h1>
+    }
+    else
+    {
+        <h1 style="color:red">Bạn không thể xoá sinh viên này!</h1>
+    }
+}
+
+<div>
+    <h4>SinhVien</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Mssv)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Mssv)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.HoTen)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.HoTen)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.GioiTinh)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.GioiTinh)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.NgaySinh)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NgaySinh)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Lop)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Lop)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Khoa)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Khoa)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Sdt)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Sdt)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SoGiuong)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SoGiuong)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.MatKhau)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.MatKhau)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.MpNavigation)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.MpNavigation.KhuVuc)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TinhTrang)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TinhTrang)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete" asp-controller="SinhViens" asp-area="Admin">
+        <input type="hidden" asp-for="Mssv" />
+        @{
+            if (ViewBag.Delete){
+            <input type="submit" value="Delete" class="btn btn-danger" />
+            }
+        }
+        <a asp-action="Index">Quay lại</a>
+    </form>
+</div>

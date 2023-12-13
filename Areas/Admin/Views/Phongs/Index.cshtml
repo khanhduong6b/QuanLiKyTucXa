@@ -1,0 +1,56 @@
+﻿@model IEnumerable<QuanLiKyTucXa.Models.Phong>
+
+@{
+    ViewData["Title"] = "Index";
+    ViewBag.contrl = "Phongs";
+}
+
+<h1>Quản lý Phòng</h1>
+
+<p>
+    <a asp-action="Create" asp-area="Admin" asp-controller="Phongs">Thêm mới</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Mp)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SoLuongSvToiDa)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SoLuongSvHienTai)
+            </th>
+            <th>
+                Khu vực
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Mp)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SoLuongSvToiDa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SoLuongSvHienTai)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.KhuVucNavigation.KhuVuc)
+            </td>
+            <td>
+                    <a asp-action="Edit" asp-area="Admin" asp-controller="Phongs" asp-route-id="@item.Mp">Chỉnh sửa</a> |
+                    <a asp-action="Details" asp-area="Admin" asp-controller="Phongs" asp-route-id="@item.Mp">Chi tiết</a> |
+                    <a asp-action="Delete" asp-area="Admin" asp-controller="Phongs" asp-route-id="@item.Mp">Xoá</a> |
+                <a asp-action="Create" asp-controller="HoaDons" asp-area="Admin" asp-route-id="@item.Mp">Thêm Hóa Đơn</a>
+
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

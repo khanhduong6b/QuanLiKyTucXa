@@ -5,7 +5,7 @@ using QuanLiKyTucXa.Models;
 namespace QuanLiKyTucXa.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Route("/AuthAdmin/[action]")]
+    [Route("/Admin/AuthAdmin/[action]")]
     public class AuthAdminController : Controller
     {
         private readonly QlktxContext _context;
@@ -37,14 +37,14 @@ namespace QuanLiKyTucXa.Areas.Admin.Controllers
                 var u = _context.AdminAccounts.SingleOrDefault(p => p.TaiKhoan == user.Username);
                 if (u == null) return View();
 
-                if (u.TaiKhoan == user.Username && u.MatKhau == _hasPassword.HasPasswordHandler(user.Password))
+                if (u.TaiKhoan == user.Username && u.MatKhau == user.Password)
                 {
 
                     HttpContext.Session.SetString("Username", u.TaiKhoan.ToString());
                     return RedirectToAction("Index", "HomeAdmin");
                 }
             }
-            return RedirectToAction("Index", "HomeAdmin");
+            return RedirectToAction("LoginAdmin", "AuthAdmin", new { Areas = "Admin" });
         }
 
         public IActionResult Logout()

@@ -1,0 +1,61 @@
+﻿@model IEnumerable<QuanLiKyTucXa.Models.HoaDonPhong>
+
+@{
+    ViewData["Title"] = "Index";
+    ViewBag.contrl = "HoaDonPhongs";
+
+}
+
+<h1>Quản lý hoá đơn phòng</h1>
+
+<p>
+    <a asp-action="Create" asp-area="Admin" asp-controller="HoaDonPhongs">Thêm mới</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.MaHoaDon)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quy)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SoTien)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TrangThai)
+            </th>
+            <th>
+                Mã số sinh viên
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaHoaDon)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SoTien)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TrangThai)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MssvNavigation.Mssv)
+            </td>
+            <td>
+                    <a asp-action="Edit" asp-area="Admin" asp-controller="HoaDonPhongs" asp-route-id="@item.MaHoaDon">Chỉnh sửa</a> |
+                    <a asp-action="Details" asp-area="Admin" asp-controller="HoaDonPhongs" asp-route-id="@item.MaHoaDon">Chi tiết</a> |
+                    <a asp-action="Delete" asp-area="Admin" asp-controller="HoaDonPhongs" asp-route-id="@item.MaHoaDon">Xoá</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

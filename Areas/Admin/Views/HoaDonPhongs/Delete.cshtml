@@ -1,0 +1,45 @@
+﻿@model QuanLiKyTucXa.Models.HoaDonPhong
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Xoá hoá đơn phòng</h1>
+
+<h3>Bạn có muốn xoá hoá đơn phòng này?</h3>
+<div>
+    <h4>HoaDonPhong</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Quy)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Quy)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SoTien)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SoTien)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TrangThai)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TrangThai)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.MssvNavigation)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.MssvNavigation.Mssv)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete" asp-area="Admin" asp-controller="HoaDonPhongs">
+        <input type="hidden" asp-for="MaHoaDon" />
+        <input type="submit" value="Xoá" class="btn btn-danger" /> |
+        <a asp-action="Index">Quay lại</a>
+    </form>
+</div>

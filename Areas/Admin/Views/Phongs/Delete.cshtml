@@ -1,0 +1,38 @@
+﻿@model QuanLiKyTucXa.Models.Phong
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Bạn có muốn xoá phòng này? </h1>
+
+<div>
+    <h4>Phong</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SoLuongSvToiDa)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SoLuongSvToiDa)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SoLuongSvHienTai)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SoLuongSvHienTai)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.KhuVucNavigation)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.KhuVucNavigation.KhuVuc)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete" asp-area="Admin" asp-controller="Phongs">
+        <input type="hidden" asp-for="Mp" />
+        <input type="submit" value="Xoá" class="btn btn-danger" /> |
+        <a asp-action="Index" asp-area="Admin" asp-controller="Phongs">Quay lại</a>
+    </form>
+</div>

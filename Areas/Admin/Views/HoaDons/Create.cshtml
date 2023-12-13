@@ -1,0 +1,82 @@
+﻿@model QuanLiKyTucXa.Models.HoaDon
+
+@{
+    ViewData["Title"] = "Create";
+    var MpFormHD = (Phong)ViewBag.MpFormHD;
+}
+
+<h1>Tạo Hoá đơn mới</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" asp-controller="HoaDons" asp-area="Admin" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="MaHoaDon" class="control-label"></label>
+                <input asp-for="MaHoaDon" class="form-control" />
+                <span asp-validation-for="MaHoaDon" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Thang" class="control-label"></label>
+                <input asp-for="Thang" class="form-control" type="month"/>
+                <span asp-validation-for="Thang" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ChiSoDau" class="control-label"></label>
+                @{
+                    if (ViewBag.chiSoDau > 0 )
+                    {   
+                        <input class="form-control" value="@ViewBag.chiSoDau" readonly/>
+                    }
+                    else
+                    {
+
+                        <input asp-for="ChiSoDau" value="0" class="form-control" readonly />
+                    }
+                }
+                <span asp-validation-for="ChiSoDau" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ChiSoCuoi" class="control-label"></label>
+                <input asp-for="ChiSoCuoi" class="form-control" />
+                <span asp-validation-for="ChiSoCuoi" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GiaDien" class="control-label"></label>
+                <input asp-for="GiaDien" class="form-control" />
+                <span asp-validation-for="GiaDien" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GiaNuoc" class="control-label"></label>
+                <input asp-for="GiaNuoc" class="form-control" />
+                <span asp-validation-for="GiaNuoc" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TrangThai" class="control-label"></label>
+                <input asp-for="TrangThai" class="form-control" />
+                <span asp-validation-for="TrangThai" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                @if (MpFormHD != null)
+                {
+                    <label asp-for="Mp" class="control-label"></label>
+                    <input class="form-control" value="@MpFormHD.Mp" readonly />
+                }
+                else
+                {
+                    <label asp-for="Mp" class="control-label"></label>
+                    <select asp-for="Mp" class="form-control" asp-items="ViewBag.Mp"></select>
+                }
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-controller="Phongs" asp-action="Index">Quay lại</a>
+</div>
+
