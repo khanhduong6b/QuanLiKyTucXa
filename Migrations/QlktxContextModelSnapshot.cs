@@ -43,7 +43,7 @@ namespace QuanLiKyTucXa.Migrations
                     b.HasIndex("TaiKhoan")
                         .IsUnique();
 
-                    b.ToTable("AdminAccounts", (string)null);
+                    b.ToTable("AdminAccounts");
                 });
 
             modelBuilder.Entity("QuanLiKyTucXa.Models.GiuongNgu", b =>
@@ -100,8 +100,8 @@ namespace QuanLiKyTucXa.Migrations
                         .HasColumnType("int")
                         .HasColumnName("maPhong");
 
-                    b.Property<int>("Thang")
-                        .HasColumnType("int")
+                    b.Property<DateTime>("Thang")
+                        .HasColumnType("date")
                         .HasColumnName("thang");
 
                     b.Property<int>("TrangThai")
@@ -195,9 +195,12 @@ namespace QuanLiKyTucXa.Migrations
                         .HasColumnName("mssv")
                         .IsFixedLength();
 
-                    b.Property<string>("TinhTrang")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)")
+                    b.Property<DateTime>("NgayVao")
+                        .HasColumnType("date")
+                        .HasColumnName("ngayVao");
+
+                    b.Property<int>("TinhTrang")
+                        .HasColumnType("int")
                         .HasColumnName("tinhTrang");
 
                     b.HasKey("MaHoSo");
@@ -272,7 +275,6 @@ namespace QuanLiKyTucXa.Migrations
                         .IsFixedLength();
 
                     b.Property<string>("MatKhau")
-                        .IsRequired()
                         .HasColumnType("varchar(30)");
 
                     b.Property<int?>("Mp")
@@ -292,6 +294,10 @@ namespace QuanLiKyTucXa.Migrations
                     b.Property<int?>("SoGiuong")
                         .HasColumnType("int")
                         .HasColumnName("soGiuong");
+
+                    b.Property<bool>("TinhTrang")
+                        .HasColumnType("bit")
+                        .HasColumnName("tinhTrang");
 
                     b.HasKey("Mssv");
 

@@ -7,21 +7,21 @@ namespace QuanLiKyTucXa.Models;
 
 public partial class Phong
 {
-    [Key]
-    [Required(ErrorMessage = "Mã phòng không được để trống")]
     [DisplayName("Mã phòng")]
+    [Required(ErrorMessage = "Mã phòng không được để trống")]
     public int Mp { get; set; }
 
-    [Required(ErrorMessage = "Số lượng sinh viên tối đa không được để trống")]
     [DisplayName("Số lượng sinh viên tối đa")]
+    [Required(ErrorMessage = "Số lượng sinh viên tối đa không được để trống")]
     public int SoLuongSvToiDa { get; set; }
 
-    [Required(ErrorMessage = "Số lượng sinh viên hiện tại không được để trống")]
     [DisplayName("Số lượng sinh viên hiện tại")]
+    [Required(ErrorMessage = "Số lượng sinh viên hiện tại không được để trống")]
+    [DefaultValue(0)]
     public int SoLuongSvHienTai { get; set; }
 
-    [Required(ErrorMessage = "Khu vực không được để trống")]
     [DisplayName("Khu vực")]
+    [Required(ErrorMessage = "Khu vực không được để trống")]
     public string KhuVuc { get; set; }
 
     public virtual Khu? KhuVucNavigation { get; set; }

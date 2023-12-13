@@ -13,7 +13,8 @@ public partial class HoaDon
     public int MaHoaDon { get; set; }
     [Required(ErrorMessage = "Tháng không được để trống")]
     [DisplayName("Tháng thu")]
-    public int Thang { get; set; }
+    [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/yyyy}")]
+    public DateTime Thang { get; set; }
     [Required(ErrorMessage ="Chỉ số đầu không được để trống")]
     [DisplayName("Chỉ số đầu của đồng hồ điện")]
     public int ChiSoDau { get; set; }
@@ -32,5 +33,5 @@ public partial class HoaDon
     [Required(ErrorMessage = "Mã phòng không được để trống")]
     [DisplayName("Mã phòng")]
     public int Mp { get; set; }
-    public virtual Phong MpNavigation { get; set; } = null!;
+    public virtual Phong? MpNavigation { get; set; } = null!;
 }

@@ -62,7 +62,7 @@ namespace QuanLiKyTucXa.Migrations
                 columns: table => new
                 {
                     MaHoaDon = table.Column<int>(type: "int", nullable: false),
-                    thang = table.Column<int>(type: "int", nullable: false),
+                    thang = table.Column<DateTime>(type: "date", nullable: false),
                     chiSoDau = table.Column<int>(type: "int", nullable: false),
                     chiSoCuoi = table.Column<int>(type: "int", nullable: false),
                     giaDien = table.Column<int>(type: "int", nullable: false),
@@ -93,7 +93,8 @@ namespace QuanLiKyTucXa.Migrations
                     sdt = table.Column<string>(type: "nchar(11)", fixedLength: true, maxLength: 11, nullable: true),
                     mp = table.Column<int>(type: "int", nullable: true),
                     soGiuong = table.Column<int>(type: "int", nullable: true),
-                    MatKhau = table.Column<string>(type: "varchar(30)", nullable: false)
+                    tinhTrang = table.Column<bool>(type: "bit", nullable: false),
+                    MatKhau = table.Column<string>(type: "varchar(30)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -154,7 +155,8 @@ namespace QuanLiKyTucXa.Migrations
                 {
                     maHoSo = table.Column<string>(type: "char(10)", unicode: false, fixedLength: true, maxLength: 10, nullable: false),
                     mssv = table.Column<string>(type: "varchar(10)", unicode: false, fixedLength: true, maxLength: 10, nullable: false),
-                    tinhTrang = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true)
+                    ngayVao = table.Column<DateTime>(type: "date", nullable: false),
+                    tinhTrang = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
