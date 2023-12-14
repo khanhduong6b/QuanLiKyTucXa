@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "Index";
     ViewBag.contrl = "SinhViens";
+
 }
 
 <h1>Quản lý sinh viên</h1>
@@ -45,16 +46,17 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Mssv)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.HoTen)
-            </td>
-            <td>
-                    @if(item.GioiTinh)
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Mssv)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HoTen)
+                </td>
+                <td>
+                    @if (item.GioiTinh)
                     {
                         <span>Nam</span>
                     }
@@ -62,32 +64,33 @@
                     {
                         <span>Nữ</span>
                     }
-                    
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Lop)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Khoa)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Sdt)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SoGiuong)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MpNavigation.Mp)
-            </td>
+
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Lop)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Khoa)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Sdt)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SoGiuong)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MpNavigation.Mp)
+                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.TinhTrang)
                 </td>
-            <td>
+                <td>
                     <a asp-action="Edit" asp-controller="SinhViens" asp-area="Admin" asp-route-id="@item.Mssv">Chỉnh sửa</a> |
                     <a asp-action="Details" asp-controller="SinhViens" asp-area="Admin" asp-route-id="@item.Mssv">Chi tiết</a> |
                     <a asp-action="Delete" asp-controller="SinhViens" asp-area="Admin" asp-route-id="@item.Mssv">Xoá</a>
-            </td>
-        </tr>
-}
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
