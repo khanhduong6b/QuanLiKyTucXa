@@ -1,11 +1,11 @@
-﻿@model HoaDon
-@{
+﻿@{
     ViewData["Title"] = "Hóa đơn";
     Layout = "";
 
-    var soDien = Model.ChiSoCuoi - Model.ChiSoDau;
-    var tienDien = Model.GiaDien * 3500;
-    var tienNuoc = 50000 * Model.MpNavigation.SoLuongSvHienTai;
+    var hoaDon = (HoaDon)ViewBag.hoaDon;
+    var soDien = hoaDon.ChiSoCuoi - hoaDon.ChiSoDau;
+    var tienDien = hoaDon.GiaDien * 3500;
+    var tienNuoc = 50000 * hoaDon.MpNavigation.SoLuongSvHienTai;
     var tongcong = tienDien + tienNuoc;
 }
 <html>
@@ -33,7 +33,7 @@
                                 <td class="">
                                 </td>
                                 <td class="text-right">
-                                    <span class="num">@Model.MaHoaDon</span><br>
+                                    <span class="num">@hoaDon.MaHoaDon</span><br>
                                     @DateTime.UtcNow
                                 </td>
                             </tr>
@@ -70,13 +70,13 @@
                                             <tr class="item">
                                             <tr>
                                                 <td>
-                                                        @Model.MaHoaDon
+                                                        @hoaDon.MaHoaDon
                                                 </td>
                                                 <td>
-                                                        @Model.Mp
+                                                        @hoaDon.Mp
                                                 </td>
                                                 <td>
-                                                        @Model.Thang
+                                                        @hoaDon.Thang
                                                 </td>
                                                 <td>
                                                         @soDien

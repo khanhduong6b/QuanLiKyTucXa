@@ -193,14 +193,15 @@ namespace QuanLiKyTucXa.Areas.Admin.Controllers
         }
 
 
-
         [HttpGet("{id}")]
         public async Task<IActionResult> InHoaDon(int id)
         {
             var hoaDon = await _context.HoaDons
                 .Include(h => h.MpNavigation)
                 .FirstOrDefaultAsync(m => m.MaHoaDon == id);
-            ViewBag.hoaDon = hoaDon;
+
+            ViewData["hoaDon"] = hoaDon;
+
             string duongDanThuMuc = @"D:\HoaDon\";
             if (!Directory.Exists(duongDanThuMuc))
             {
@@ -217,6 +218,7 @@ namespace QuanLiKyTucXa.Areas.Admin.Controllers
                 }
 
                 var viewDictionary = new ViewDataDictionary(new EmptyModelMetadataProvider(), new ModelStateDictionary());
+                viewDictionary["hoaDon"] = hoaDon;
 
                 var viewContext = new ViewContext(
                     ControllerContext,
@@ -226,7 +228,15 @@ namespace QuanLiKyTucXa.Areas.Admin.Controllers
                     stringWriter,
                     new HtmlHelperOptions());
 
-                await viewResult.View.RenderAsync(viewContext);
+                try
+                {
+                    await viewResult.View.RenderAsync(viewContext);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Lỗi khi render view: " + ex.Message);
+                    throw; 
+                }
 
                 var htmlToPdf = new HtmlToPdf(1000, 1414);
                 htmlToPdf.Options.DrawBackground = true;
