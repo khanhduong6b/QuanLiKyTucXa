@@ -113,22 +113,22 @@
         </div>
         <div class="main-menu-content">
             <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-                <li class="active">
+                <li class="nav-item @(active == 1 ? "active":"")">
                     <a asp-action="Index" asp-controller="HomeAdmin" asp-area="Admin"><i class="ft-home"></i><span class="menu-title" data-i18n="">Dashboard Admin</span></a>
                 </li>
-                <li class=" nav-item">
+                <li class=" nav-item @(active == 2 ? "active":"")">
                     <a asp-action="Index" asp-controller="SinhViens" asp-area="Admin"><i class="ft-pie-chart"></i><span class="menu-title" data-i18n="">Sinh viên</span></a>
                 </li>
-                <li class=" nav-item">
+                <li class=" nav-item @(active == 3 ? "active":"")">
                     <a asp-action="Index" asp-controller="HoaDons" asp-area="Admin"><i class="ft-droplet"></i><span class="menu-title" data-i18n="">Hóa đơn</span></a>
                 </li>
-                <li class=" nav-item">
+                <li class=" nav-item @(active == 4 ? "active":"") ">
                     <a asp-action="Index" asp-controller="HoaDonPhongs" asp-area="Admin"><i class="ft-layers"></i><span class="menu-title" data-i18n="">Hóa đơn phòng</span></a>
                 </li>
-                <li class=" nav-item">
+                <li class=" nav-item @(active == 5 ? "active":"")">
                     <a asp-action="Index" asp-controller="PhieuDangKies" asp-area="Admin"><i class="ft-box"></i><span class="menu-title" data-i18n="">Phiếu đăng kí</span></a>
                 </li>
-                <li class=" nav-item">
+                <li class=" nav-item @(active == 6 ? "active":"")">
                     <a asp-action="Index" asp-controller="Phongs" asp-area="Admin"><i class="ft-bold"></i><span class="menu-title" data-i18n="">Phòng</span></a>
                 </li>
             </ul>
