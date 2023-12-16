@@ -1,11 +1,11 @@
-﻿@model HoaDon
-@{
+﻿@{
     ViewData["Title"] = "Hóa đơn";
     Layout = "";
 
-    var soDien = Model.ChiSoCuoi - Model.ChiSoDau;
-    var tienDien = Model.GiaDien * 3500;
-    var tienNuoc = 50000 * Model.MpNavigation.SoLuongSvHienTai;
+    var hoaDon = (HoaDon)ViewBag.hoaDon;
+    var soDien = hoaDon.ChiSoCuoi - hoaDon.ChiSoDau;
+    var tienDien = hoaDon.GiaDien * 3500;
+    var tienNuoc = 50000 * hoaDon.MpNavigation.SoLuongSvHienTai;
     var tongcong = tienDien + tienNuoc;
 }
 <html>
