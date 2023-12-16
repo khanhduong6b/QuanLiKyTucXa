@@ -3,10 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Mvc.ViewEngines;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.EntityFrameworkCore;
 using QuanLiKyTucXa.Helper;
 using QuanLiKyTucXa.Models;
+using SelectPdf;
 
 namespace QuanLiKyTucXa.Areas.Admin.Controllers
 {
@@ -16,10 +20,12 @@ namespace QuanLiKyTucXa.Areas.Admin.Controllers
     public class HoaDonsController : Controller
     {
         private readonly QlktxContext _context;
+        private ICompositeViewEngine _compositiveViewEngine;
 
-        public HoaDonsController(QlktxContext context)
+        public HoaDonsController(QlktxContext context, ICompositeViewEngine compositiveViewEngine)
         {
             _context = context;
+            _compositiveViewEngine = compositiveViewEngine;
         }
 
         // GET: Admin/HoaDons
@@ -185,5 +191,61 @@ namespace QuanLiKyTucXa.Areas.Admin.Controllers
         {
           return (_context.HoaDons?.Any(e => e.MaHoaDon == id)).GetValueOrDefault();
         }
+
+
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> InHoaDon(int id)
+        {
+            var hoaDon = await _context.HoaDons
+                .Include(h => h.MpNavigation)
+                .FirstOrDefaultAsync(m => m.MaHoaDon == id);
+            ViewBag.hoaDon = hoaDon;
+            string duongDanThuMuc = @"D:\HoaDon\";
+            if (!Directory.Exists(duongDanThuMuc))
+            {
+                Directory.CreateDirectory(duongDanThuMuc);
+            }
+
+            using (var stringWriter = new StringWriter())
+            {
+                var viewResult = _compositiveViewEngine.FindView(ControllerContext, "InHoaDon", false);
+
+                if (viewResult.View == null)
+                {
+                    throw new ArgumentNullException("View không tồn tại");
+                }
+
+                var viewDictionary = new ViewDataDictionary(new EmptyModelMetadataProvider(), new ModelStateDictionary());
+
+                var viewContext = new ViewContext(
+                    ControllerContext,
+                    viewResult.View,
+                    viewDictionary,
+                    TempData,
+                    stringWriter,
+                    new HtmlHelperOptions());
+
+                await viewResult.View.RenderAsync(viewContext);
+
+                var htmlToPdf = new HtmlToPdf(1000, 1414);
+                htmlToPdf.Options.DrawBackground = true;
+
+                var pdf = htmlToPdf.ConvertHtmlString(stringWriter.ToString());
+                var pdfBytes = pdf.Save();
+
+                using (var streamWriter = new StreamWriter(@"D:\HoaDon\HoaDon_" + hoaDon.MaHoaDon + ".pdf"))
+                {
+                    await streamWriter.BaseStream.WriteAsync(pdfBytes, 0, pdfBytes.Length);
+                }
+
+                return File(pdfBytes, "application/pdf");
+
+            }
+
+        }
+
+
+
     }
 }

@@ -12,7 +12,7 @@ using QuanLiKyTucXa.Models;
 namespace QuanLiKyTucXa.Migrations
 {
     [DbContext(typeof(QlktxContext))]
-    [Migration("20231210120937_V0")]
+    [Migration("20231216094518_V0")]
     partial class V0
     {
         /// <inheritdoc />

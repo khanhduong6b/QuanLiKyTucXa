@@ -1,0 +1,126 @@
+﻿@model HoaDon
+@{
+    ViewData["Title"] = "Hóa đơn";
+    Layout = "";
+
+    var soDien = Model.ChiSoCuoi - Model.ChiSoDau;
+    var tienDien = Model.GiaDien * 3500;
+    var tienNuoc = 50000 * Model.MpNavigation.SoLuongSvHienTai;
+    var tongcong = tienDien + tienNuoc;
+}
+<html>
+<head lang="en">
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="~/css/inhoadon.css">       @*ko ăn css *@
+</head>
+
+<body>
+    <div class="row expanded">
+        <main class="columns">
+            <div class="inner-container">
+                <section class="row">
+                    <div class="callout large invoice-container">
+                        <table class="invoice">
+                            <tr class="header">
+                                <td class="">
+                                    <img src="" alt="Hình ảnh" />
+                                </td>
+                                <td class="align-right">
+                                    <h2>Hóa đơn</h2>
+                                </td>
+                            </tr>
+                            <tr class="intro">
+                                <td class="">
+                                </td>
+                                <td class="text-right">
+                                    <span class="num">@Model.MaHoaDon</span><br>
+                                    @DateTime.UtcNow
+                                </td>
+                            </tr>
+                            <tr class="details">
+                                <td colspan="2">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    Mã hóa đơn
+                                                </th>
+                                                <th>
+                                                    Mã phòng
+                                                </th>
+                                                <th>
+                                                    Tháng
+                                                </th>
+                                                <th>
+                                                    Số điện
+                                                </th>
+                                                <th>
+                                                    Giá điện
+                                                </th>
+                                                <th>
+                                                    Giá nước
+                                                </th>
+                                                <th>
+
+                                                </th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="item">
+                                            <tr>
+                                                <td>
+                                                        @Model.MaHoaDon
+                                                </td>
+                                                <td>
+                                                        @Model.Mp
+                                                </td>
+                                                <td>
+                                                        @Model.Thang
+                                                </td>
+                                                <td>
+                                                        @soDien
+                                                </td>
+                                                <td>
+                                                        @tienDien
+                                                </td>
+                                                <td>
+                                                        @tienNuoc
+                                                </td>
+                                            </tr>
+                            </tr>
+                            </tbody>
+                        </table>
+                        </td>
+                        </tr>
+                        <tr class="totals">
+                            <td></td>
+                            <td>
+                                <table>
+                                    <tr class="total">
+                                        <td>Tổng cộng</td>
+                                        <td>@tongcong</td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        </table>
+
+                        <section class="additional-info">
+                            <div class="row">
+                                <div class="columns">
+                                    <h5>Thông tin hóa đơn được in bởi</h5>
+                                    <p>
+                                        Nhóm 4
+                                    </p>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+</body>
+
+</html>
