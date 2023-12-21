@@ -1,0 +1,77 @@
+﻿@model IEnumerable<QuanLiKyTucXa.Models.SinhVien>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Mssv)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HoTen)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GioiTinh)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Lop)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Khoa)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sdt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SoGiuong)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mp)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TinhTrang)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Mssv)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HoTen)
+                </td>
+                <td>
+                    @if (item.GioiTinh)
+                    {
+                        <span>Nam</span>
+                    }
+                    else
+                    {
+                        <span>Nữ</span>
+                    }
+
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Lop)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Khoa)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Sdt)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SoGiuong)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MpNavigation.Mp)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TinhTrang)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
