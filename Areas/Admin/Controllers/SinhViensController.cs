@@ -46,12 +46,13 @@ namespace QuanLiKyTucXa.Areas.Admin.Controllers
             var sinhVien = await _context.SinhViens
                 .Include(s => s.MpNavigation)
                 .FirstOrDefaultAsync(m => m.Mssv == id);
-            var hdphong = await _context.HoaDonPhongs.Include(s=>s.MssvNavigation).FirstOrDefaultAsync(m => m.Mssv == id);
             if (sinhVien == null)
             {
                 return NotFound();
             }
-            ViewBag.hdphong = hdphong;
+
+            sinhVien.HoaDonPhongs = await _context.HoaDonPhongs.Where(a => a.Mssv == id).ToListAsync();
+            ViewData["MaHoaDon"] = new SelectList(_context.SinhViens, "HoaDonPhongs", "HoaDonPhongs");
             return View(sinhVien);
         }
 
@@ -257,6 +258,16 @@ namespace QuanLiKyTucXa.Areas.Admin.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+
+        // Add this action in your controller
+        public async Task<IActionResult> GetHoaDonDetails(string maHoaDon)
+        {
+            // Fetch details for the selected MaHoaDon
+            var hoaDonDetails =await _context.HoaDonPhongs.FindAsync(maHoaDon);
+
+            return PartialView("_HoaDonDetailsPartial", hoaDonDetails);
+        }
+
 
         private bool SinhVienExists(string id)
         {

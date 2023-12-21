@@ -1,0 +1,49 @@
+﻿@{
+    ViewData["Title"] = "Thống kê sinh viên theo ngày vào";
+    ViewBag.contrl = "Analysis";
+}
+
+
+
+
+<h2>Thống kê sinh viên theo ngày vào</h2>
+
+
+<form id="thongKeForm">
+    <div class="form-group">
+        <label for="ngayVao">Chọn tháng và năm:</label>
+        <input type="month" class="form-control" id="ngayVao" name="ngayVao" required>
+    </div>
+    <button type="button" id="xemDanhSachBtn" class="btn btn-primary" onclick="xemDanhSachSinhVien()">Xem danh sách</button>
+</form>
+
+<table class="table">
+    <tr>
+        <td rowspan="9" id="xemSinhVien"></td>
+    </tr>
+</table>
+
+
+<div id="danhSachSinhVienPartial"></div>
+
+<script type="text/javascript">
+        
+        function xemDanhSachSinhVien() {
+            var ngayVao = document.getElementById("ngayVao").value;
+
+        const xhttp = new XMLHttpRequest();
+
+        // Define a callback function
+        xhttp.onload = function () {
+            // Here you can use the Data
+            // //nhan gia tri tra ve
+            document.getElementById("xemSinhVien").innerHTML = xhttp.responseText;
+            console.log(xhttp.responseText);
+        }
+
+        // Send a request
+        const strUrl = "ThongKeSinhVienTheoNgayVao?ngayVao=" + ngayVao;
+        xhttp.open("GET", strUrl);
+        xhttp.send();
+        }
+    </script>
