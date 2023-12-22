@@ -82,10 +82,6 @@ public partial class QlktxContext : DbContext
             entity.Property(e => e.TrangThai).HasColumnName("trangThai");
             entity.Property(e => e.Mp).HasColumnName("maPhong");
 
-            entity.HasOne(d => d.MpNavigation).WithMany(p => p.HoaDons)
-                .HasForeignKey(d => d.Mp)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_HoaDon_Phong");
         });
 
         modelBuilder.Entity<HoaDonPhong>(entity =>
@@ -180,11 +176,18 @@ public partial class QlktxContext : DbContext
             entity.Property(e => e.SoLuongSvHienTai).HasColumnName("soLuongSVHienTai");
             entity.Property(e => e.SoLuongSvToiDa).HasColumnName("soLuongSVToiDa");
 
+            entity.HasMany(d => d.HoaDons) // Thêm đoạn này để chỉ ra mối quan hệ một-nhiều
+                .WithOne(p => p.MpNavigation) // Ánh xạ ngược về Phòng
+                .HasForeignKey(d => d.Mp)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_HoaDon_Phong");
+
             entity.HasOne(d => d.KhuVucNavigation).WithMany(p => p.Phongs)
                 .HasForeignKey(d => d.KhuVuc)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Phong_Khu");
         });
+
 
         modelBuilder.Entity<SinhVien>(entity =>
         {

@@ -7,7 +7,6 @@ namespace QuanLiKyTucXa.Models;
 
 public partial class HoaDon
 {
-    [Key]
     [Required(ErrorMessage = "Mã hoá đơn không được để trống")]
     [DisplayName("Mã hoá đơn")]
     public int MaHoaDon { get; set; }

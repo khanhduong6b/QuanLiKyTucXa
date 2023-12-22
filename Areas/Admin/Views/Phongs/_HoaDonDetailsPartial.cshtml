@@ -1,0 +1,18 @@
+﻿@model QuanLiKyTucXa.Models.HoaDon
+<table class="table table-borderless">
+<tr>
+    <th>Mã hoá đơn</th>
+    <th>Tháng</th>
+    <th>Số điện</th>
+    <th>Trạng thái</th>
+</tr>
+<tr>
+    <td>@Model.MaHoaDon</td>
+    <td>@Model.Thang</td>
+        <td>@{
+               var a = Model.ChiSoCuoi - Model.ChiSoDau;
+            }
+            @a</td>
+        <td>@Model.TrangThai</td>
+</tr>
+</table>

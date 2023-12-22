@@ -25,6 +25,9 @@
                 @Html.DisplayNameFor(model => model.GioiTinh)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.NgaySinh)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Lop)
             </th>
             <th>
@@ -65,6 +68,9 @@
                         <span>Nữ</span>
                     }
 
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NgaySinh)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Lop)

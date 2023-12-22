@@ -179,6 +179,14 @@ namespace QuanLiKyTucXa.Areas.Admin.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        public async Task<IActionResult> GetHoaDonDetails(int maHoaDon)
+        {
+            // Fetch details for the selected MaHoaDon
+            var hoaDonDetails = await _context.HoaDons.FindAsync(maHoaDon);
+
+            return PartialView("_HoaDonDetailsPartial", hoaDonDetails);
+        }
+
         private bool PhongExists(int id)
         {
           return (_context.Phongs?.Any(e => e.Mp == id)).GetValueOrDefault();

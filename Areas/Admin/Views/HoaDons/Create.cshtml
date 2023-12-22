@@ -2,7 +2,7 @@
 
 @{
     ViewData["Title"] = "Create";
-    var MpFormHD = (Phong)ViewBag.MpFormHD;
+    var MpFormHD = ViewBag.MpFormHD;
 }
 
 <h1>Tạo Hoá đơn mới</h1>
@@ -61,7 +61,7 @@
                 @if (MpFormHD != null)
                 {
                     <label asp-for="Mp" class="control-label"></label>
-                    <input class="form-control" value="@MpFormHD.Mp" readonly />
+                    <input class="form-control" value="@MpFormHD.Mp" asp-for="Mp" readonly />
                 }
                 else
                 {

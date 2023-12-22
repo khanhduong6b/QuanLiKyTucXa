@@ -5,15 +5,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using QuanLiKyTucXa.Helper;
 using QuanLiKyTucXa.Models;
 
-namespace QuanLiKyTucXa.Areas.Admin.Controllers
+namespace QuanLiKyTucXa.Controllers
 {
-    [Area("Admin")]
-    [Route("/Admin/PhieuDangKies/[action]")]
-    //[Check]
-
     public class PhieuDangKiesController : Controller
     {
         private readonly QlktxContext _context;
@@ -23,20 +18,14 @@ namespace QuanLiKyTucXa.Areas.Admin.Controllers
             _context = context;
         }
 
-        // GET: Admin/PhieuDangKies
-        public async Task<IActionResult> Index(string search = "")
+        // GET: PhieuDangKies
+        public async Task<IActionResult> Index()
         {
-            List<PhieuDangKy> listPDK = new();
-            if (!string.IsNullOrEmpty(search))
-            {
-                listPDK = await _context.PhieuDangKies.Where(a => a.MaHoSo.Contains(search)).Include(s => s.MssvNavigation).ToListAsync();
-            }
-            else
-                listPDK = await _context.PhieuDangKies.Include(p => p.MssvNavigation).ToListAsync();
-            return View(listPDK);
+            var qlktxContext = _context.PhieuDangKies.Where(p => p.Mssv=="DH52005709").Include(p => p.MssvNavigation);
+            return View(await qlktxContext.ToListAsync());
         }
 
-        // GET: Admin/PhieuDangKies/Details/5
+        // GET: PhieuDangKies/Details/5
         public async Task<IActionResult> Details(string id)
         {
             if (id == null || _context.PhieuDangKies == null)
@@ -55,17 +44,19 @@ namespace QuanLiKyTucXa.Areas.Admin.Controllers
             return View(phieuDangKy);
         }
 
-        // GET: Admin/PhieuDangKies/Create
+        // GET: PhieuDangKies/Create
         public IActionResult Create()
         {
             ViewData["Mssv"] = new SelectList(_context.SinhViens, "Mssv", "Mssv");
             return View();
         }
 
-        // POST: Admin/PhieuDangKies/Create
+        // POST: PhieuDangKies/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(PhieuDangKy phieuDangKy)
+        public async Task<IActionResult> Create([Bind("MaHoSo,Mssv,NgayVao,TinhTrang")] PhieuDangKy phieuDangKy)
         {
             if (ModelState.IsValid)
             {
@@ -73,13 +64,11 @@ namespace QuanLiKyTucXa.Areas.Admin.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            
             ViewData["Mssv"] = new SelectList(_context.SinhViens, "Mssv", "Mssv", phieuDangKy.Mssv);
             return View(phieuDangKy);
         }
 
-        // GET: Admin/PhieuDangKies/Edit/5
-        [HttpGet("{id}")]
+        // GET: PhieuDangKies/Edit/5
         public async Task<IActionResult> Edit(string id)
         {
             if (id == null || _context.PhieuDangKies == null)
@@ -96,8 +85,10 @@ namespace QuanLiKyTucXa.Areas.Admin.Controllers
             return View(phieuDangKy);
         }
 
-        // POST: Admin/PhieuDangKies/Edit/5
-        [HttpPost("{id}")]
+        // POST: PhieuDangKies/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(string id, [Bind("MaHoSo,Mssv,NgayVao,TinhTrang")] PhieuDangKy phieuDangKy)
         {
@@ -130,8 +121,7 @@ namespace QuanLiKyTucXa.Areas.Admin.Controllers
             return View(phieuDangKy);
         }
 
-        // GET: Admin/PhieuDangKies/Delete/5
-        [HttpGet("{id}")]
+        // GET: PhieuDangKies/Delete/5
         public async Task<IActionResult> Delete(string id)
         {
             if (id == null || _context.PhieuDangKies == null)
@@ -150,8 +140,8 @@ namespace QuanLiKyTucXa.Areas.Admin.Controllers
             return View(phieuDangKy);
         }
 
-        // POST: Admin/PhieuDangKies/Delete/5
-        [HttpPost("{id}"), ActionName("Delete")]
+        // POST: PhieuDangKies/Delete/5
+        [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {

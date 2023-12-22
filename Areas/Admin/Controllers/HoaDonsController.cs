@@ -28,7 +28,7 @@ namespace QuanLiKyTucXa.Areas.Admin.Controllers
             List<HoaDon> listHD = new();
             if (!string.IsNullOrEmpty(search))
             {
-                listHD = await _context.HoaDons.Where(a => a.Thang.ToString().Contains(search)).Include(s => s.MpNavigation).ToListAsync();
+                listHD = await _context.HoaDons.Where(a => a.MaHoaDon.ToString() == search).Include(s => s.MpNavigation).ToListAsync();
             }
             else
                 listHD = await _context.HoaDons.Include(h => h.MpNavigation).ToListAsync();
@@ -73,7 +73,7 @@ namespace QuanLiKyTucXa.Areas.Admin.Controllers
                 }
             }
             else
-                ViewData["Mp"] = new SelectList(_context.Phongs, "Mp", "KhuVuc");
+                ViewData["Mp"] = new SelectList(_context.Phongs, "Mp", "Mp");
             return View();
         }
 
@@ -82,17 +82,23 @@ namespace QuanLiKyTucXa.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("MaHoaDon,Thang,ChiSoDau,ChiSoCuoi,GiaDien,GiaNuoc,TrangThai,Mp")] HoaDon hoaDon)
         {
+            if (HoaDonExists(hoaDon.MaHoaDon))
+            {
+                ModelState.AddModelError("MaHoaDon", "Mã hoá đơn trùng");
+            }
+            else
             if (ModelState.IsValid)
             {
                 _context.Add(hoaDon);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Mp"] = new SelectList(_context.Phongs, "Mp", "KhuVuc", hoaDon.Mp);
+            ViewData["Mp"] = new SelectList(_context.Phongs, "Mp", "Mp", hoaDon.Mp);
             return View(hoaDon);
         }
 
         // GET: Admin/HoaDons/Edit/5
+        [HttpGet("{id}")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.HoaDons == null)
@@ -105,12 +111,12 @@ namespace QuanLiKyTucXa.Areas.Admin.Controllers
             {
                 return NotFound();
             }
-            ViewData["Mp"] = new SelectList(_context.Phongs, "Mp", "KhuVuc", hoaDon.Mp);
+            ViewData["Mp"] = new SelectList(_context.Phongs, "Mp", "Mp", hoaDon.Mp);
             return View(hoaDon);
         }
 
         // POST: Admin/HoaDons/Edit/5
-        [HttpPost]
+        [HttpPost("{id}")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("MaHoaDon,Thang,ChiSoDau,ChiSoCuoi,GiaDien,GiaNuoc,TrangThai,Mp")] HoaDon hoaDon)
         {
@@ -139,7 +145,7 @@ namespace QuanLiKyTucXa.Areas.Admin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Mp"] = new SelectList(_context.Phongs, "Mp", "KhuVuc", hoaDon.Mp);
+            ViewData["Mp"] = new SelectList(_context.Phongs, "Mp", "Mp", hoaDon.Mp);
             return View(hoaDon);
         }
 

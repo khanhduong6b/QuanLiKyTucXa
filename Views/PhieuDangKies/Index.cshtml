@@ -1,0 +1,51 @@
+﻿@model IEnumerable<QuanLiKyTucXa.Models.PhieuDangKy>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Quản lý phiếu đăng ký</h1>
+
+<p>
+    <a asp-action="Create" >Thêm mới</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.MaHoSo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NgayVao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TinhTrang)
+            </th>
+            <th>
+                Mã sinh viên
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaHoSo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NgayVao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TinhTrang)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MssvNavigation.Mssv)
+                </td>
+                <td>
+                    <a asp-action="Pay" asp-route-id="@item.MaHoSo">Thanh toán</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

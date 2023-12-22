@@ -4,6 +4,13 @@
     ViewData["Title"] = "Details";
 }
 
+@{
+
+    QlktxContext _context = new QlktxContext();
+    SelectList DSHD = new SelectList(_context.HoaDons.Where(h => h.Mp == Model.Mp).ToList(), "MaLoai", "MaLoai");
+    Model.HoaDons = _context.HoaDons.Where(h => h.Mp == Model.Mp).ToList();
+}
+
 <h1>Chi tiết</h1>
 
 <div>
@@ -22,14 +29,53 @@
             @Html.DisplayFor(model => model.SoLuongSvHienTai)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.KhuVucNavigation)
+            @Html.DisplayNameFor(model => model.KhuVuc)
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.KhuVucNavigation.KhuVuc)
         </dd>
     </dl>
+    <div>
+        <label for="maHoaDon">Chọn Mã Hóa Đơn:</label>
+        <select id="maHoaDon" class="form-control" onchange="xemChiTietHoaDon()">
+            <option value="">-- Chọn Mã Hóa Đơn --</option>
+            @{
+                foreach (var hoaDon in Model.HoaDons)
+                {
+                    <option value="@hoaDon.MaHoaDon">@hoaDon.MaHoaDon</option>
+                }
+            }
+        </select>
+        <table class="table">
+            <tr>
+                <td rowspan="4" id="xemHd"></td>
+            </tr>
+        </table>
+    </div>
 </div>
 <div>
-    <a asp-action="Edit" asp-area="Admin" asp-controller="Phongs" asp-route-id="@Model?.Mp">Edit</a> |
+    <a asp-action="Edit" asp-area="Admin" asp-controller="Phongs" asp-route-id="@Model?.Mp">Sửa</a> |
     <a asp-action="Index" asp-area="Admin" asp-controller="Phongs">Quay lại</a>
 </div>
+
+<script type="text/javascript">
+    function xemChiTietHoaDon() {
+        const mals = document.getElementById("maHoaDon").value;
+
+        // Create an XMLHttpRequest object
+        const xhttp = new XMLHttpRequest();
+
+        // Define a callback function
+        xhttp.onload = function () {
+            // Here you can use the Data
+            // //nhan gia tri tra ve
+            document.getElementById("xemHd").innerHTML = xhttp.responseText;
+            console.log(xhttp.responseText);
+        }
+
+        // Send a request
+        const strUrl = "GetHoaDonDetails?maHoaDon=" + mals;
+        xhttp.open("GET", strUrl);
+        xhttp.send();
+    }
+</script>
